@@ -5,3 +5,11 @@
 build
 
 **/*.swp
+
+
+# Eclipse generated files
+
+app/.classpath
+app/.project
+app/.settings/
+app/bin/
