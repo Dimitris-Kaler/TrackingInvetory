@@ -9,7 +9,7 @@ build
 
 # Eclipse generated files
 
-app/.classpath
-app/.project
-app/.settings/
-app/bin/
+inventoryk/.classpath
+inventoryk/.project
+inventoryk/.settings/
+inventoryk/bin/
