@@ -38,13 +38,41 @@ class ItemSpec extends Specification{
 		e.message == "Expected name for item but got empty value for name instead."
 	}
 
+	def "create item with null serial Number"(){
+		when:
+		new Item("dimitris",null,10)
+		
+		then:
+		def e=thrown(NullSerialNumberNotAllowedException.class)
+	}
+	
+	def "create item with serialNumber length different from 9"(){
+		when:
+		new Item("dimitris","AXB124A",10)
+		
+		then:
+		def e=thrown(SerialNumberLengthNotEqual9.class)
+		
+	}
+	
+	def "create item with null value"(){
+		when:
+		new Item("dimitris","AXB124AXY",null)
+		
+		then:
+		def e=thrown(NullValueNotAllowedException.class)
+	}
+	
+
 	def "create item with value less than 1" () {
 		when:
-		new Item("name", 0.5)
+		new Item("name","AXB124AXY", 0.5)
 
 		then:
 		def e = thrown(LessThanOneValueException.class)
 	}
+
+	
 
 
 

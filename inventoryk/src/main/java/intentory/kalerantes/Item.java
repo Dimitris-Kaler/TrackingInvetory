@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 public class Item {
 
 	private String name;
+	private String serialNumber;
 	private BigDecimal value;
 
-	public Item(String name, BigDecimal value) {
+	public Item(String name, String serialNumber, BigDecimal value) {
 		this.name = name;
+		this.serialNumber=serialNumber;
 		this.value = value;
 		validateInput(name, value);
 	}
