@@ -19,16 +19,16 @@ public class ItemList {
 	
 	public void addItem(Scanner scanner) {
     	System.out.print("Item name: ");
-    	String name=scanner.nextLine();
+    	String name=scanner.next();
     	System.out.print("Item serial number: ");
-    	String SerialNumber=scanner.nextLine();
+    	String SerialNumber=scanner.next();
     	System.out.print("Item value: ");
     	BigDecimal value=scanner.nextBigDecimal();
     	
     	Item item=new Item(name,SerialNumber,value);
     	getLi().add(item);
     	scanner.nextLine();
-    	scanner.close();
+    	System.out.println("The item has succesfully submitted to the ItemList");
 }
 
 }
