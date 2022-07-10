@@ -5,7 +5,7 @@ package intentory.kalerantes;
 
 import java.util.Scanner;
 
-
+import formats.CsvFormat;
 import formats.HtmlFormat;
 
 
@@ -40,6 +40,7 @@ public class App {
     public static void main(String[] args) {
     	ItemList list=new ItemList();
     	HtmlFormat htmlformat=new HtmlFormat(list);
+    	CsvFormat csvFormatter=new CsvFormat(list);
     	StringBuilder strBuilder=new StringBuilder();
     	boolean loop=true;
         System.out.println(new App().getGreeting());
@@ -59,20 +60,23 @@ public class App {
     		scanner.nextLine();
     		list.addItem(scanner);
     		
-    	}if(choice==4) {
-    		System.out.println(list.getLi());
-    		loop=false;
-    		
     	}
-    	if(choice==3) {
-    		continue;
-    	}
-    	if(choice==2) {
+      	if(choice==2) {
 //    		System.out.println(list.print());
 //    		System.out.print(HtmlFormat.printItemsToReport(list));
     		htmlformat.printHtml(strBuilder);
     		
     	}
+      	if(choice==3) {
+      		csvFormatter.printCsv(strBuilder);
+    	}
+    	if(choice==4) {
+    		System.out.println(list.getLi());
+    		loop=false;
+    		
+    	}
+    	
+  
     	}
    }
     	
