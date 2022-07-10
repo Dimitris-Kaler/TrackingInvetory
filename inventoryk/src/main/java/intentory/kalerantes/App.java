@@ -5,6 +5,10 @@ package intentory.kalerantes;
 
 import java.util.Scanner;
 
+
+import formats.HtmlFormat;
+
+
 public class App {
 	
 	
@@ -35,6 +39,8 @@ public class App {
 
     public static void main(String[] args) {
     	ItemList list=new ItemList();
+    	HtmlFormat htmlformat=new HtmlFormat(list);
+    	StringBuilder strBuilder=new StringBuilder();
     	boolean loop=true;
         System.out.println(new App().getGreeting());
     
@@ -61,8 +67,14 @@ public class App {
     	if(choice==3) {
     		continue;
     	}
+    	if(choice==2) {
+//    		System.out.println(list.print());
+//    		System.out.print(HtmlFormat.printItemsToReport(list));
+    		htmlformat.printHtml(strBuilder);
+    		
     	}
-    }
+    	}
+   }
     	
     }
 }
