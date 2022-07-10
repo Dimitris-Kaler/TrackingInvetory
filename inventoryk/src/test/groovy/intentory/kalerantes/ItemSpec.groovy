@@ -8,21 +8,22 @@ class ItemSpec extends Specification{
 	@Unroll
 	def "create item with name and value"() {
 		when:
-		Item item = new Item(name, value)
+		Item item = new Item(name,serialNumber, value)
 
 		then:
 		item.name == name
+		item.serialNumber==serialNumber
 		item.value == value
 
 		where:
-		name 		| value
-		"dimitris" 	| 24.34
-		"stelios"  	| 1
+		name 	    |serialNumber| value
+		"dimitris" 	|"AXB124AXY" |24.34
+		"stelios"  	| "S40AZBDE4"|1
 	}
 
 	def "create item with null name"() {
 		when:
-		new Item(null, 12)
+		new Item(null,"AXB124AXY", 12)
 
 		then:
 		def e = thrown(NullNameNotAllowedException.class)
@@ -31,13 +32,12 @@ class ItemSpec extends Specification{
 
 	def "create item with empty name"() {
 		when:
-		new Item("", 12)
+		new Item("","AXB124AXY", 12)
 
 		then:
 		def e = thrown(EmptyNameNotAllowedException.class)
 		e.message == "Expected name for item but got empty value for name instead."
 	}
-
 	def "create item with null serial Number"(){
 		when:
 		new Item("dimitris",null,10)
