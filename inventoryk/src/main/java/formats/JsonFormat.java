@@ -34,6 +34,7 @@ public class JsonFormat {
 //		
 //		return strJson;
 //	}
+	
 	public String convertToJson() {
 		Gson gson=new GsonBuilder().setPrettyPrinting().create();
 		String strJson=gson.toJson(items.getLi());
@@ -46,12 +47,16 @@ public class JsonFormat {
 	
 
 	public void createFileWithJsonFormat()  {
+		if(items.getLi().size()==0) {
+			throw new NullItemListException();
+		}else {
 		File file=new File("text.json");
 		try(FileWriter fWriter=new FileWriter(file)){
 			fWriter.write(convertToJson());
 			
 		}catch(IOException e) {
 			System.out.println(e);
+		}
 		}
 		
 		

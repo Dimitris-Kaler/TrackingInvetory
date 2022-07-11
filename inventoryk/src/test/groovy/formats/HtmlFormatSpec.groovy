@@ -71,6 +71,10 @@ class HtmlFormatSpec extends Specification {
 		
 		
 	}
+	
+	def "create HtmlFile With the invetory List"(){
+		
+	}
 
 		
 	

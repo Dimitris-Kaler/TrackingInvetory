@@ -17,6 +17,18 @@ class JsonFormatSpec extends Specification {
 	jFormat.items==items
 	
 	}
+	def "Message if invetory List is empty"(){
+		when:
+		ItemList li=new ItemList();
+		JsonFormat jFormat=new JsonFormat(li)
+		jFormat.createFileWithJsonFormat()
+		
+		then:
+		def e=thrown(NullItemListException.class)
+		e.message=="Expected items in the inventory but we took null instead!"
+				
+		
+	}
 	
 	def "convert ItemList to Json Format"(){
 		given:
@@ -67,6 +79,10 @@ class JsonFormatSpec extends Specification {
 			+"]")
 		
 	}
+	
+
+	
+
 	
 	def "Save JsonFormat to File"(){
 		given:
