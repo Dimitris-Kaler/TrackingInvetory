@@ -25,8 +25,6 @@ public class App {
                 }
                 else
                     return choice;
-
-
             }else{
                 sc.next();
                 System.out.println("Invalid input!!!");
