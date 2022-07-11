@@ -14,10 +14,6 @@ import formats.JsonFormat;
 
 public class App {
 	
-	
-    public String getGreeting() {
-        return "Hello World!";
-    }
     public static int readInt(Scanner sc,int lower,int upper){
         int choice;
         while(true){
@@ -44,7 +40,6 @@ public class App {
     	ItemList list=new ItemList();
     	HtmlFormat htmlformat=new HtmlFormat(list);
     	CsvFormat csvFormatter=new CsvFormat(list);
-        System.out.println(new App().getGreeting());
         JsonFormat jFormat=new JsonFormat(list);
         boolean loop=true;
         try(Scanner scanner=new Scanner(System.in)){
@@ -65,8 +60,6 @@ public class App {
     		
     	}
       	if(choice==2) {
-//    		System.out.println(list.print());
-//    		System.out.print(HtmlFormat.printItemsToReport(list));
     		htmlformat.printHtml();
     		
     	}
