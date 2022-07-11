@@ -57,7 +57,7 @@ public class App {
     	System.out.println("3.Print Out CSV fromat");
     	System.out.println("4.Save Inventory to Json file");
     	System.out.println("5.Exit The program");
-    	int choice=readInt(scanner,1,4);
+    	int choice=readInt(scanner,1,5);
     	
     	if(choice==1) {
     		scanner.nextLine();
