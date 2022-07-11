@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import formats.CsvFormat;
 import formats.HtmlFormat;
+import formats.JsonFormat;
+
 
 
 
@@ -43,6 +45,7 @@ public class App {
     	HtmlFormat htmlformat=new HtmlFormat(list);
     	CsvFormat csvFormatter=new CsvFormat(list);
         System.out.println(new App().getGreeting());
+        JsonFormat jFormat=new JsonFormat(list);
         boolean loop=true;
         try(Scanner scanner=new Scanner(System.in)){
     while(loop) {
@@ -52,7 +55,8 @@ public class App {
     	System.out.println("1.Add Item");
     	System.out.println("2.Print Out HTML format");
     	System.out.println("3.Print Out CSV fromat");
-    	System.out.println("4.Exit The program");
+    	System.out.println("4.Save Inventory to Json file");
+    	System.out.println("5.Exit The program");
     	int choice=readInt(scanner,1,4);
     	
     	if(choice==1) {
@@ -69,7 +73,13 @@ public class App {
       	if(choice==3) {
       		csvFormatter.printCsv();
     	}
-    	if(choice==4) {
+      	if(choice==4) {
+      		
+      		jFormat.createFileWithJsonFormat();
+      		System.out.println("The JsonFile with the Inventory Items has succesfully created!!");
+      		
+      	}
+    	if(choice==5) {
     		System.out.println("BYE BYE!!!");
     		loop=false;
     		
