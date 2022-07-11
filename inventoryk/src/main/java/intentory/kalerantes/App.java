@@ -9,6 +9,7 @@ import formats.CsvFormat;
 import formats.HtmlFormat;
 
 
+
 public class App {
 	
 	
@@ -41,10 +42,8 @@ public class App {
     	ItemList list=new ItemList();
     	HtmlFormat htmlformat=new HtmlFormat(list);
     	CsvFormat csvFormatter=new CsvFormat(list);
-    	StringBuilder strBuilder=new StringBuilder();
-    	boolean loop=true;
         System.out.println(new App().getGreeting());
-    
+        boolean loop=true;
         try(Scanner scanner=new Scanner(System.in)){
     while(loop) {
     	
@@ -64,14 +63,14 @@ public class App {
       	if(choice==2) {
 //    		System.out.println(list.print());
 //    		System.out.print(HtmlFormat.printItemsToReport(list));
-    		htmlformat.printHtml(strBuilder);
+    		htmlformat.printHtml();
     		
     	}
       	if(choice==3) {
-      		csvFormatter.printCsv(strBuilder);
+      		csvFormatter.printCsv();
     	}
     	if(choice==4) {
-    		System.out.println(list.getLi());
+    		System.out.println("BYE BYE!!!");
     		loop=false;
     		
     	}

@@ -21,12 +21,14 @@ public class HtmlFormat {
 		return items;
 	}
 
-	public void printHtml(StringBuilder strBuilder){
+	public void printHtml(){
+		StringBuilder strBuilder=new StringBuilder();
 		System.out.println("INVETORY HTML REPORT");
 		System.out.println("********************");
 		 htmlHeader(strBuilder);
 		 printItems(getItems(),strBuilder);
-		 htmlFooter(strBuilder);	
+		 htmlFooter(strBuilder);
+		 strBuilder.setLength(0);
 		
 		
 		
@@ -70,7 +72,7 @@ public class HtmlFormat {
 }
 	 public void htmlFooter(StringBuilder sbuilder) {
 		 final String HTMLSTRING= "</body>\r\n"
-		 		+ "</html>";
+		 		+ "</html>\n";
 		 
 		 sbuilder.append(HTMLSTRING);
 		 System.out.println(sbuilder.toString()+"\n");

@@ -67,7 +67,7 @@ class HtmlFormatSpec extends Specification {
 		htmlFormat.htmlFooter(strBuilder)
 		
 		then:
-		strBuilder.length()==16
+		strBuilder.length()==17
 		
 		
 	}

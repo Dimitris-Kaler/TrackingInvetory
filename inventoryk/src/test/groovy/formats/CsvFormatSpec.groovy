@@ -21,29 +21,29 @@ class CsvFormatSpec extends Specification {
 		ItemList items=new ItemList()
 		items.getLi().add(item)
 		CsvFormat csvFormat=new CsvFormat(items);
-		StringBuilder sBuilder=new StringBuilder()
 		when:
-		csvFormat.printCsv(sBuilder)
+		String result=csvFormat.printCsv()
 		
 		then:
-		sBuilder.length()>20;
+		result=="SKODA,XSWER234R,2000\n"
+
+		
+//		
 	}
 	
-//	def "print message if the list of items is empty"(){
-//		given:
-//		ItemList items=new ItemList()
-//		StringBuilder sBuilder=new StringBuilder()
-//		CsvFormat csvFormat=new CsvFormat(items);
-//		
-//		when:
-//		csvFormat.printCsv(sBuilder)
-//		csvFormat.items.getLi().isEmpty();
-//		
-//		then: 
-//		System.out.println(csvFormat.items.getLi().isEmpty());
-//		sBuilder.append("The List is Empty.")
-//		
-//		
-//	}
+	def "print message if the list of items is empty"(){
+		given:
+		ItemList items=new ItemList()
+		CsvFormat csvFormat=new CsvFormat(items);
+		
+		when:
+		String result=csvFormat.printCsv()
+		csvFormat.items.getLi().isEmpty();
+		
+		then: 
+		result=="The inventory List is emtpy\n"
+		
+		
+	}
 
 }
