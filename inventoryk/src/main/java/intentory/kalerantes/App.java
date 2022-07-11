@@ -14,7 +14,7 @@ import formats.JsonFormat;
 
 public class App {
 	
-    public static int readInt(Scanner sc,int lower,int upper){
+    private static int readInt(Scanner sc,int lower,int upper){
         int choice;
         while(true){
             System.out.print("Your choice:");
