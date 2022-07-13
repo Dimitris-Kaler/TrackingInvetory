@@ -14,65 +14,37 @@ import formats.JsonFormat;
 
 public class App {
 	
-    private static int readInt(Scanner sc,int lower,int upper){
-        int choice;
-        while(true){
-            System.out.print("Your choice:");
-            if(sc.hasNextInt()){
-                choice=sc.nextInt();
-                if(choice<lower || choice>upper){
-                    System.out.println("Error: Between "+lower+" and "+upper);
-                }
-                else
-                    return choice;
-            }else{
-                sc.next();
-                System.out.println("Invalid input!!!");
-
-            }
-        }
-
-    }
 
     public static void main(String[] args) {
     	ItemList list=new ItemList();
     	HtmlFormat htmlformat=new HtmlFormat(list);
     	CsvFormat csvFormatter=new CsvFormat(list);
         JsonFormat jFormat=new JsonFormat(list);
-        boolean loop=true;
+        
         try(Scanner scanner=new Scanner(System.in)){
+      boolean loop=true;
     while(loop) {
-    	
-    	System.out.println("WELCOME TO TRACKING INVETORY - PROJECT");
-    	System.out.println("********************");
-    	System.out.println("1.Add Item");
-    	System.out.println("2.Print Out HTML format");
-    	System.out.println("3.Print Out CSV fromat");
-    	System.out.println("4.Save Inventory to Json file");
-    	System.out.println("5.Exit The program");
-    	int choice=readInt(scanner,1,5);
+    	printMenuOptions();
+    	int choice=readInt(scanner,1,6);
     	
     	if(choice==1) {
     		scanner.nextLine();
     		list.addItem(scanner);
-    		
     	}
       	if(choice==2) {
-    		htmlformat.printHtml();
-    		
+      		systemOutPrintHtml(htmlformat);
     	}
       	if(choice==3) {
-      		csvFormatter.printCsv();
+    		htmlformat.createHtmlFile();
     	}
       	if(choice==4) {
-      		
+      		csvFormatter.printCsv();
+    	}
+      	if(choice==5) {
       		jFormat.createFileWithJsonFormat();
-      		System.out.println("The JsonFile with the Inventory Items has succesfully created!!");
-      		
       	}
-    	if(choice==5) {
-    		System.out.println("BYE BYE!!!");
-    		loop=false;
+    	if(choice==6) {
+    		loop = exitProgram();
     		
     	}
     	
@@ -81,4 +53,50 @@ public class App {
    }
     	
     }
+
+
+
+	
+
+	
+
+	private static void printMenuOptions() {
+		System.out.println("WELCOME TO TRACKING INVETORY - PROJECT");
+    	System.out.println("**************************************");
+    	System.out.println("1.Add Item");
+    	System.out.println("2.Print Out HTML format");
+    	System.out.println("3.Save Inventory To Html file");
+    	System.out.println("4.Print Out Csv format");
+    	System.out.println("5.Save Inventory to Json file");
+    	System.out.println("6.Exit The program");
+	}
+	
+	  private static int readInt(Scanner sc,int lower,int upper){
+	        int choice;
+	        while(true){
+	            System.out.print("Your choice:");
+	            if(sc.hasNextInt()){
+	                choice=sc.nextInt();
+	                if(choice<lower || choice>upper){
+	                    System.out.println("Error: Between "+lower+" and "+upper);
+	                }
+	                else
+	                    return choice;
+	            }else{
+	                sc.next();
+	                System.out.println("Invalid input!!!");
+
+	            }
+	        } 
+
+	    }
+	  private static void systemOutPrintHtml(HtmlFormat htmlformat) {
+			System.out.println("INVETORY HTML REPORT");
+			System.out.println("********************");
+			System.out.println(htmlformat.printHtml());
+		}
+	  private static boolean exitProgram() {
+  		System.out.println("BYE BYE!!!");
+  		return false;
+  	}
 }
