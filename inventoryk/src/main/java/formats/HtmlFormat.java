@@ -30,7 +30,6 @@ public class HtmlFormat {
 		 htmlHeader(strBuilder);
 		 printItems(getItems(),strBuilder);
 		 htmlFooter(strBuilder);
-//		 strBuilder.setLength(0);
 		 return strBuilder.toString();
 			
 	}
@@ -62,17 +61,27 @@ public class HtmlFormat {
 					+ "    <th>serialNumber</th>\n"
 					+ "    <th>value</th>\n"
 					+"   </tr>\n");
-			for (Item item:getItems().getLi()) {
-				 String str="   <tr>\n"
-				 		+ "    <td>"+item.getName()+"</td>\n"
-				 				+ "    <td>"+item.getSerialNumber()+"</td>\n"
-				 						+ "    <td>"+item.getValue()+"</td>\n"
-				 								+ "   </tr>\n";
-				 sbuilder.append(str);
-			}
-			sbuilder.append("  <tbody>\n </table>\n");}
-	
+			appendListItems(sbuilder);
+			
+			}	
 }
+
+
+
+
+private void appendListItems(StringBuilder sbuilder) {
+		for (Item item:getItems().getLi()) {
+			 String str="   <tr>\n"
+			 		+ "    <td>"+item.getName()+"</td>\n"
+			 				+ "    <td>"+item.getSerialNumber()+"</td>\n"
+			 						+ "    <td>"+item.getValue()+"</td>\n"
+			 								+ "   </tr>\n";
+			 sbuilder.append(str);
+		}
+		sbuilder.append("  <tbody>\n </table>\n");
+	}
+
+
 	 public void htmlFooter(StringBuilder sbuilder) {
 		 final String HTMLSTRING= "</body>\r\n"
 		 		+ "</html>\n";
