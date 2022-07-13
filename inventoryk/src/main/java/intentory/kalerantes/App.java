@@ -17,7 +17,7 @@ public class App {
 
     public static void main(String[] args) {
     	ItemList list=new ItemList();
-    	HtmlFormat htmlformat=new HtmlFormat(list);
+    	HtmlFormat htmlformatter=new HtmlFormat(list);
     	CsvFormat csvFormatter=new CsvFormat(list);
         JsonFormat jFormat=new JsonFormat(list);
         
@@ -26,19 +26,18 @@ public class App {
     while(loop) {
     	printMenuOptions();
     	int choice=readInt(scanner,1,6);
-    	
     	if(choice==1) {
     		scanner.nextLine();
     		list.addItem(scanner);
     	}
       	if(choice==2) {
-      		systemOutPrintHtml(htmlformat);
+      		systemOutPrintHtml(htmlformatter);
     	}
       	if(choice==3) {
-    		htmlformat.createHtmlFile();
+    		htmlformatter.createHtmlFile();
     	}
       	if(choice==4) {
-      		csvFormatter.printCsv();
+      		systemOutPrintCsv(csvFormatter);
     	}
       	if(choice==5) {
       		jFormat.createFileWithJsonFormat();
@@ -53,6 +52,14 @@ public class App {
    }
     	
     }
+
+
+
+
+
+
+
+	
 
 
 
@@ -95,6 +102,14 @@ public class App {
 			System.out.println("********************");
 			System.out.println(htmlformat.printHtml());
 		}
+	  
+	  private static void systemOutPrintCsv(CsvFormat csvFormatter) {
+			System.out.println("INVETORY CSV REPORT");
+			System.out.println("********************");
+			System.out.println(csvFormatter.printCsv()+"\n");
+		}
+	  
+	  
 	  private static boolean exitProgram() {
   		System.out.println("BYE BYE!!!");
   		return false;

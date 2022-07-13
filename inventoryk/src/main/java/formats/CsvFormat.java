@@ -23,9 +23,7 @@ public class CsvFormat {
 	
 	public String printCsv() {
 		StringBuilder strBuilder=new StringBuilder();
-		System.out.println("INVETORY CSV REPORT");
-		System.out.println("********************");
-		
+	
 		if(getItems().getLi().isEmpty()) {
 			strBuilder.append("The inventory List is emtpy\n");
 					
@@ -38,7 +36,7 @@ public class CsvFormat {
 		}
 		
 		
-		System.out.println(strBuilder.toString()+"\n");
+//		System.out.println(strBuilder.toString()+"\n");
 		return strBuilder.toString();
 		
 		
