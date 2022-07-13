@@ -1,4 +1,4 @@
-package intentory.kalerantes;
+package exceptions;
 
 public class EmptyNameNotAllowedException extends RuntimeException {
 

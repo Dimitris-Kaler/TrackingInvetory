@@ -2,6 +2,14 @@ package intentory.kalerantes;
 
 import java.math.BigDecimal;
 
+import exceptions.EmptyNameNotAllowedException;
+import exceptions.LessThanOneValueException;
+import exceptions.NullNameNotAllowedException;
+import exceptions.NullSerialNumberNotAllowedException;
+import exceptions.NullValueNotAllowedException;
+import exceptions.OneLetterNotAllowedException;
+import exceptions.SerialNumberLengthNotEqualNine;
+
 public class Item {
 
 	private String name;
@@ -72,7 +80,7 @@ public class Item {
 
 	private void checkSerialNumberLengthNot9(String serialNumber) {
 		if (serialNumber.length() != 9)
-			throw new SerialNumberLengthNotEqual9();
+			throw new SerialNumberLengthNotEqualNine();
 	}
 
 	private void checkNotNullValue(BigDecimal value) {

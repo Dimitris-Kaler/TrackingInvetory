@@ -1,6 +1,6 @@
-package intentory.kalerantes;
+package exceptions;
 
-class SerialNumberLengthNotEqual9 extends RuntimeException {
+public class SerialNumberLengthNotEqualNine extends RuntimeException {
 
 	@Override
 	public String getMessage() {

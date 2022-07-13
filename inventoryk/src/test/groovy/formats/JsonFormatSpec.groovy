@@ -2,6 +2,7 @@ package formats
 
 import intentory.kalerantes.Item
 import intentory.kalerantes.ItemList
+import exceptions.NullItemListException
 import spock.lang.Specification
 
 

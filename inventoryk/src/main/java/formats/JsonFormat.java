@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import exceptions.NullItemListException;
 import intentory.kalerantes.Item;
 import intentory.kalerantes.ItemList;
 
@@ -22,15 +23,6 @@ public class JsonFormat {
 	public ItemList getItems() {
 		return items;
 	}
-
-//	public String convertToJson() {
-//		Gson json=new Gson();
-//	String strJson=json.toJson(items.getLi());
-//	
-//		
-//		
-//		return strJson;
-//	}
 
 	public void createFileWithJsonFormat() {
 		if (items.getLi().size() == 0) {

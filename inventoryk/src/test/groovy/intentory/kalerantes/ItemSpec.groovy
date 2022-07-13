@@ -3,6 +3,16 @@ package intentory.kalerantes
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import exceptions.EmptyNameNotAllowedException;
+import exceptions.LessThanOneValueException;
+import exceptions.NullNameNotAllowedException;
+import exceptions.NullSerialNumberNotAllowedException;
+import exceptions.NullValueNotAllowedException;
+import exceptions.OneLetterNotAllowedException;
+import exceptions.SerialNumberLengthNotEqualNine;
+
+
+
 class ItemSpec extends Specification{
 
 	@Unroll
@@ -41,28 +51,27 @@ class ItemSpec extends Specification{
 	def "create item with null serial Number"(){
 		when:
 		new Item("dimitris",null,10)
-		
+
 		then:
 		def e=thrown(NullSerialNumberNotAllowedException.class)
 	}
-	
+
 	def "create item with serialNumber length different from 9"(){
 		when:
 		new Item("dimitris","AXB124A",10)
-		
+
 		then:
-		def e=thrown(SerialNumberLengthNotEqual9.class)
-		
+		def e=thrown(SerialNumberLengthNotEqualNine.class)
 	}
-	
+
 	def "create item with null value"(){
 		when:
 		new Item("dimitris","AXB124AXY",null)
-		
+
 		then:
 		def e=thrown(NullValueNotAllowedException.class)
 	}
-	
+
 
 	def "create item with value less than 1" () {
 		when:
@@ -71,9 +80,4 @@ class ItemSpec extends Specification{
 		then:
 		def e = thrown(LessThanOneValueException.class)
 	}
-
-	
-
-
-
 }
