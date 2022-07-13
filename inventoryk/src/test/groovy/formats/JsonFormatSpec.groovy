@@ -92,7 +92,7 @@ class JsonFormatSpec extends Specification {
 		items.getLi().add(item)
 		JsonFormat jFormat=new JsonFormat(items)
 		File file=new File("text.json")
-		FileWriter fWriter=new FileWriter(file)		
+		FileWriter fWriter=new FileWriter(file)
 		
 		when:
 		jFormat.createFileWithJsonFormat()
