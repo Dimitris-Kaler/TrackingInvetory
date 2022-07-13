@@ -1,5 +1,9 @@
 package formats;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import intentory.kalerantes.Item;
 import intentory.kalerantes.ItemList;
 
@@ -21,17 +25,14 @@ public class HtmlFormat {
 		return items;
 	}
 
-	public void printHtml(){
+	public String printHtml(){
 		StringBuilder strBuilder=new StringBuilder();
-		System.out.println("INVETORY HTML REPORT");
-		System.out.println("********************");
 		 htmlHeader(strBuilder);
 		 printItems(getItems(),strBuilder);
 		 htmlFooter(strBuilder);
-		 strBuilder.setLength(0);
-		
-		
-		
+//		 strBuilder.setLength(0);
+		 return strBuilder.toString();
+			
 	}
 
 	public void htmlHeader(StringBuilder sbuilder) {
@@ -48,12 +49,14 @@ public class HtmlFormat {
 				
 			 sbuilder.append(HTMLSTRING);
 	}
+	
+	
 	 public void printItems(ItemList list,StringBuilder sbuilder) {
 		 if(list.getLi().size()==0) {
 			 sbuilder.append(" <p>No items on the Invetory.</p>\n");
 		 }else {
-			sbuilder.append(" <table>\n"
-					+"  <thead>\n"
+			sbuilder.append(" <table style='margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'>\n"
+					+"  <thead style='border-bottom:1px solid blue'>\n"
 					+"   <tr>\n"
 					+ "    <th>name</th>\n"
 					+ "    <th>serialNumber</th>\n"
@@ -61,9 +64,9 @@ public class HtmlFormat {
 					+"   </tr>\n");
 			for (Item item:getItems().getLi()) {
 				 String str="   <tr>\n"
-				 		+ "    <th>"+item.getName()+"</th>\n"
-				 				+ "    <th>"+item.getSerialNumber()+"</th>\n"
-				 						+ "    <th>"+item.getValue()+"</th>\n"
+				 		+ "    <td>"+item.getName()+"</td>\n"
+				 				+ "    <td>"+item.getSerialNumber()+"</td>\n"
+				 						+ "    <td>"+item.getValue()+"</td>\n"
 				 								+ "   </tr>\n";
 				 sbuilder.append(str);
 			}
@@ -75,7 +78,20 @@ public class HtmlFormat {
 		 		+ "</html>\n";
 		 
 		 sbuilder.append(HTMLSTRING);
-		 System.out.println(sbuilder.toString()+"\n");
 		 
 	 }
+	 
+	 public void createHtmlFile() {
+		File file =new File("inventory.html");
+		try (FileWriter fWriter=new FileWriter(file)){
+			fWriter.write(printHtml());
+			System.out.println("HTML File created!");
+			
+		}catch(IOException e) {
+			System.out.println(e);
+			
+		}
+	 }
+	 
+	 
 }
