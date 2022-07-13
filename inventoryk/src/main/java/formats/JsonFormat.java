@@ -35,15 +35,6 @@ public class JsonFormat {
 //		return strJson;
 //	}
 	
-	public String convertToJson() {
-		Gson gson=new GsonBuilder().setPrettyPrinting().create();
-		String strJson=gson.toJson(items.getLi());
-		
-		return strJson;
-		
-		
-	}
-	
 	
 
 	public void createFileWithJsonFormat()  {
@@ -53,6 +44,8 @@ public class JsonFormat {
 		File file=new File("text.json");
 		try(FileWriter fWriter=new FileWriter(file)){
 			fWriter.write(convertToJson());
+			System.out.println("The JsonFile with the Inventory Items has succesfully created!!");
+      		
 			
 		}catch(IOException e) {
 			System.out.println(e);
@@ -61,6 +54,15 @@ public class JsonFormat {
 		
 		
 	}
+	public String convertToJson() {
+		Gson gson=new GsonBuilder().setPrettyPrinting().create();
+		String strJson=gson.toJson(items.getLi());
+		
+		return strJson;
+		
+		
+	}
+	
 	
 	
 	
