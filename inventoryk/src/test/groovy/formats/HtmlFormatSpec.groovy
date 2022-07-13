@@ -73,7 +73,18 @@ class HtmlFormatSpec extends Specification {
 	}
 	
 	def "create HtmlFile With the invetory List"(){
+		given:
+		ItemList items=new ItemList()
+		HtmlFormat htmlFormat=new HtmlFormat(items);
+		when:
+		htmlFormat.createHtmlFile();
+			
 		
+		
+		then:
+		File file=new File("inventory.html")
+		FileWriter fWriter=new FileWriter(file)
+		fWriter.write(htmlFormat.printHtml());
 	}
 
 		
