@@ -13,10 +13,10 @@ public class Menu {
 	public Menu() {
 		menu = new ArrayList<MenuItem>();
 		menu.add(new MenuItem("1", "Add Item"));
-		menu.add(new MenuItem("2", "Print Out HTML format"));
-		menu.add(new MenuItem("3", "Save Inventory To Html file"));
-		menu.add(new MenuItem("4", "Print Out Csv format"));
-		menu.add(new MenuItem("5", "Save Inventory to Json file"));
+		menu.add(new PrintHtmlMenuItem("2", "Print Out HTML format"));
+		menu.add(new CreateHtmlFileMenuItem("3", "Save Inventory To Html file"));
+		menu.add(new PrintCSVMenuItem("4", "Print Out Csv format"));
+		menu.add(new SaveJSONFileMenuItem("5", "Save Inventory to Json file"));
 		menu.add(new ExitProgramMenuItem("6", "Exit The program"));
 	}
 

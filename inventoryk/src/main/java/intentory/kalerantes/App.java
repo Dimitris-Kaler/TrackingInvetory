@@ -6,9 +6,6 @@ package intentory.kalerantes;
 import java.util.Scanner;
 
 import exceptions.InvalidMenuChoice;
-import formats.CsvFormat;
-import formats.HtmlFormat;
-import formats.JsonFormat;
 
 public class App {
 
@@ -16,9 +13,6 @@ public class App {
 
 	public static void main(String[] args) {
 		ItemList list = new ItemList();
-		HtmlFormat htmlformatter = new HtmlFormat(list);
-		CsvFormat csvFormatter = new CsvFormat(list);
-		JsonFormat jFormat = new JsonFormat(list);
 
 		try (Scanner scanner = new Scanner(System.in)) {
 			boolean loop = true;
@@ -32,22 +26,8 @@ public class App {
 					scanner.nextLine();
 					list.addItem(scanner);
 				}
-				if ("2".equals(choice)) {
-					systemOutPrintHtml(htmlformatter);
-				}
-				if ("3".equals(choice)) {
-					htmlformatter.createHtmlFile();
-				}
-				if ("4".equals(choice)) {
-					systemOutPrintCsv(csvFormatter);
-				}
-				if ("5".equals(choice)) {
-					jFormat.createFileWithJsonFormat();
-				}
-
 			}
 		}
-
 	}
 
 	private static void printMenuOptions() {
@@ -100,20 +80,5 @@ public class App {
 		}
 	}
 
-	private static void systemOutPrintHtml(HtmlFormat htmlformat) {
-		System.out.println("INVETORY HTML REPORT");
-		System.out.println("********************");
-		System.out.println(htmlformat.printHtml());
-	}
 
-	private static void systemOutPrintCsv(CsvFormat csvFormatter) {
-		System.out.println("INVETORY CSV REPORT");
-		System.out.println("********************");
-		System.out.println(csvFormatter.printCsv() + "\n");
-	}
-
-	private static boolean exitProgram() {
-		System.out.println("BYE BYE!!!");
-		return false;
-	}
 }
