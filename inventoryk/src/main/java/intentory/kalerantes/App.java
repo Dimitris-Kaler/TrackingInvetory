@@ -49,14 +49,7 @@ public class App {
 	}
 
 	private static void printMenuOptions() {
-		System.out.println("WELCOME TO TRACKING INVETORY - PROJECT");
-		System.out.println("**************************************");
-		System.out.println("1.Add Item");
-		System.out.println("2.Print Out HTML format");
-		System.out.println("3.Save Inventory To Html file");
-		System.out.println("4.Print Out Csv format");
-		System.out.println("5.Save Inventory to Json file");
-		System.out.println("6.Exit The program");
+		System.out.println(new Menu().options());
 	}
 
 	private static String parseInputFromCommandLine(Scanner sc) {
