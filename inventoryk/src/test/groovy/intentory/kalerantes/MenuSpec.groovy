@@ -20,4 +20,18 @@ class MenuSpec extends Specification {
 6.Exit The program"""
 	}
 
+	def "find menu by code"() {
+		given:
+		Menu menu = new Menu();
+
+		when:
+		MenuItem mi = menu.findByCode("1")
+
+		then:
+		mi.code == "1"
+		mi.description == "Add Item"
+	}
+
+	//code null
+
 }

@@ -22,6 +22,15 @@ public class Menu {
 		return header() + menuOptionsAsString();
 	}
 
+	public MenuItem findByCode(String code) {
+		for (MenuItem mi : menu) {
+			if (mi.getCode().equals(code)) {
+				return mi;
+			}
+		}
+		return null;
+	}
+
 	private String header() {
 		return "WELCOME TO TRACKING INVETORY - PROJECT\n" +
 				"**************************************\n";
