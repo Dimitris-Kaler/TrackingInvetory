@@ -15,7 +15,8 @@ class AppTest extends Specification {
 		App.acceptChoice(choice)
 
 		then:
-		thrown(InvalidMenuChoice)
+		def e = thrown(InvalidMenuChoice)
+		e.message == "Expected value between 1 and 6 but got ${choice} instead."
 
 		where:
 		choice << ["a", "asdfasdgfasdg", "112", "0", null]
