@@ -12,6 +12,8 @@ import formats.JsonFormat;
 
 public class App {
 
+	private static Menu menu = new Menu();
+
 	public static void main(String[] args) {
 		ItemList list = new ItemList();
 		HtmlFormat htmlformatter = new HtmlFormat(list);
@@ -23,6 +25,8 @@ public class App {
 			while (loop) {
 				printMenuOptions();
 				String choice = parseInputFromCommandLine(scanner);
+				MenuItem menuItemSelected = menu.findByCode(choice);
+				menuItemSelected.execute(list);
 
 				if ("1".equals(choice)) {
 					scanner.nextLine();
@@ -40,9 +44,6 @@ public class App {
 				if ("5".equals(choice)) {
 					jFormat.createFileWithJsonFormat();
 				}
-				if ("6".equals(choice)) {
-					loop = exitProgram();
-				}
 
 			}
 		}
@@ -50,7 +51,7 @@ public class App {
 	}
 
 	private static void printMenuOptions() {
-		System.out.println(new Menu().options());
+		System.out.println(menu.options());
 	}
 
 	private static String parseInputFromCommandLine(Scanner sc) {

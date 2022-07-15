@@ -23,4 +23,8 @@ public class MenuItem  {
 		return String.format("%s.%s", code, description);
 	}
 
+	public void execute(ItemList list) {
+
+	}
+
 }

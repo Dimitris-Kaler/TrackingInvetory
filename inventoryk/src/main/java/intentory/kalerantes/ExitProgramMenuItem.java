@@ -6,7 +6,8 @@ public class ExitProgramMenuItem extends MenuItem {
 		super(code, description);
 	}
 
-	public void execute() {
+	@Override
+	public void execute(ItemList list) {
 		System.out.println("BYE BYE!!!");
 		System.exit(0);
 	}
