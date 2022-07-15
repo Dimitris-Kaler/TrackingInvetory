@@ -1,6 +1,6 @@
 package intentory.kalerantes;
 
-public class MenuItem  {
+public abstract class MenuItem implements MenuItemCommand  {
 
 	private String code;
 	private String description;
@@ -23,8 +23,5 @@ public class MenuItem  {
 		return String.format("%s.%s", code, description);
 	}
 
-	public void execute(ItemList list) {
-
-	}
 
 }

@@ -1,5 +1,7 @@
 package intentory.kalerantes;
 
+import java.util.Scanner;
+
 import formats.JsonFormat;
 
 public class SaveJSONFileMenuItem extends MenuItem {
@@ -9,7 +11,7 @@ public class SaveJSONFileMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list) {
+	public void execute(ItemList list, Scanner scanner) {
 		JsonFormat jFormat = new JsonFormat(list);
 		//TODO this one fails
 		jFormat.createFileWithJsonFormat();

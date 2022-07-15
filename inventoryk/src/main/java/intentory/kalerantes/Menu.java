@@ -12,7 +12,7 @@ public class Menu {
 
 	public Menu() {
 		menu = new ArrayList<MenuItem>();
-		menu.add(new MenuItem("1", "Add Item"));
+		menu.add(new AddItemMenuItem("1", "Add Item"));
 		menu.add(new PrintHtmlMenuItem("2", "Print Out HTML format"));
 		menu.add(new CreateHtmlFileMenuItem("3", "Save Inventory To Html file"));
 		menu.add(new PrintCSVMenuItem("4", "Print Out Csv format"));

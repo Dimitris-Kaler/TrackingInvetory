@@ -1,5 +1,7 @@
 package intentory.kalerantes;
 
+import java.util.Scanner;
+
 import formats.HtmlFormat;
 
 public class PrintHtmlMenuItem extends MenuItem {
@@ -9,7 +11,7 @@ public class PrintHtmlMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list) {
+	public void execute(ItemList list, Scanner scanner) {
 		HtmlFormat htmlFormat = new HtmlFormat(list);
 		System.out.println("INVETORY HTML REPORT");
 		System.out.println("********************");

@@ -20,12 +20,7 @@ public class App {
 				printMenuOptions();
 				String choice = parseInputFromCommandLine(scanner);
 				MenuItem menuItemSelected = menu.findByCode(choice);
-				menuItemSelected.execute(list);
-
-				if ("1".equals(choice)) {
-					scanner.nextLine();
-					list.addItem(scanner);
-				}
+				menuItemSelected.execute(list, scanner);
 			}
 		}
 	}
