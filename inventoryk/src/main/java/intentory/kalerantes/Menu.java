@@ -15,7 +15,7 @@ public class Menu {
 		menu.add(new MenuItem("3", "Save Inventory To Html file"));
 		menu.add(new MenuItem("4", "Print Out Csv format"));
 		menu.add(new MenuItem("5", "Save Inventory to Json file"));
-		menu.add(new MenuItem("6", "Exit The program"));
+		menu.add(new ExitProgramMenuItem("6", "Exit The program"));
 	}
 
 	public String options() {

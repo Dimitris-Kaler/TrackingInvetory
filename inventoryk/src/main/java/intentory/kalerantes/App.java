@@ -23,6 +23,7 @@ public class App {
 			while (loop) {
 				printMenuOptions();
 				String choice = parseInputFromCommandLine(scanner);
+
 				if ("1".equals(choice)) {
 					scanner.nextLine();
 					list.addItem(scanner);

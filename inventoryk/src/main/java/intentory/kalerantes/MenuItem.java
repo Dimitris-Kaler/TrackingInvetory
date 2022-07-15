@@ -1,6 +1,6 @@
 package intentory.kalerantes;
 
-public class MenuItem {
+public class MenuItem  {
 
 	private String code;
 	private String description;
