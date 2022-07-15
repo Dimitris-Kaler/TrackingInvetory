@@ -19,9 +19,12 @@ public class Menu {
 	}
 
 	public String options() {
+		return header() + menuOptionsAsString();
+	}
+
+	private String header() {
 		return "WELCOME TO TRACKING INVETORY - PROJECT\n" +
-		"**************************************\n" +
-		menuOptionsAsString();
+				"**************************************\n";
 	}
 
 	private String menuOptionsAsString() {
