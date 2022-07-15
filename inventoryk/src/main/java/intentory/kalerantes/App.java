@@ -22,26 +22,25 @@ public class App {
 			boolean loop = true;
 			while (loop) {
 				printMenuOptions();
-				int choice = readInt(scanner, 1, 6);
-				if (choice == 1) {
+				String choice = parseInputFromCommandLine(scanner);
+				if ("1".equals(choice)) {
 					scanner.nextLine();
 					list.addItem(scanner);
 				}
-				if (choice == 2) {
+				if ("2".equals(choice)) {
 					systemOutPrintHtml(htmlformatter);
 				}
-				if (choice == 3) {
+				if ("3".equals(choice)) {
 					htmlformatter.createHtmlFile();
 				}
-				if (choice == 4) {
+				if ("4".equals(choice)) {
 					systemOutPrintCsv(csvFormatter);
 				}
-				if (choice == 5) {
+				if ("5".equals(choice)) {
 					jFormat.createFileWithJsonFormat();
 				}
-				if (choice == 6) {
+				if ("6".equals(choice)) {
 					loop = exitProgram();
-
 				}
 
 			}
@@ -60,23 +59,33 @@ public class App {
 		System.out.println("6.Exit The program");
 	}
 
-	private static int readInt(Scanner sc, int lower, int upper) {
-		int choice;
-		while (true) {
-			System.out.print("Your choice:");
-			if (sc.hasNextInt()) {
-				choice = sc.nextInt();
-				if (choice < lower || choice > upper) {
-					System.out.println("Error: Between " + lower + " and " + upper);
-				} else
-					return choice;
-			} else {
-				sc.next();
-				System.out.println("Invalid input!!!");
-
+	private static String parseInputFromCommandLine(Scanner sc) {
+		prompt();
+		while(sc.hasNext()) {
+			try {
+				return validateChoice(sc);
+			} catch (Exception e) {
+				handleException(e);
+			}
+			finally {
+				prompt();
 			}
 		}
+		return null;
+	}
 
+	private static void handleException(Exception e) {
+		System.err.println(e.getMessage());
+	}
+
+	private static String validateChoice(Scanner sc) {
+		String choice = sc.next();
+		acceptChoice(choice);
+		return choice;
+	}
+
+	private static void prompt() {
+		System.out.println("Enter choice: ");
 	}
 
 	public static void acceptChoice(String choice) {
