@@ -1,5 +1,6 @@
 package intentory.kalerantes
 
+import exceptions.InvalidMenuItemCode
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -20,8 +21,30 @@ class MenuSpec extends Specification {
 6.Exit The program"""
 	}
 
+	def "searching for menu item with invalid code" () {
+		given:
+		Menu menu = new Menu();
+
+		when:
+		MenuItem mi = menu.findByCode("1f3")
+
+		then:
+		thrown(InvalidMenuItemCode)
+	}
+
+	def "searching for menu item with null" () {
+		given:
+		Menu menu = new Menu();
+
+		when:
+		MenuItem mi = menu.findByCode(null)
+
+		then:
+		thrown(InvalidMenuItemCode)
+	}
+
 	@Unroll
-	def "find menu by code"() {
+	def "find menu item by code"() {
 		given:
 		Menu menu = new Menu();
 
@@ -41,7 +64,5 @@ class MenuSpec extends Specification {
 		"5"  || "Save Inventory to Json file"
 		"6"  || "Exit The program"
 	}
-
-	//code null
 
 }
