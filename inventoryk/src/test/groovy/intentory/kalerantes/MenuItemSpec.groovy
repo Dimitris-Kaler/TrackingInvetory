@@ -16,8 +16,4 @@ class MenuItemSpec extends Specification {
 		mi.description == "Add Item"
 	}
 
-	def "header message"() {
-		mi.headerMessage() == "INVETORY HTML REPORT\n********************"
-	}
-
 }

@@ -13,7 +13,10 @@ public class HtmlFormat {
 
 	public HtmlFormat(ItemList items) {
 		this.items = items;
+	}
 
+	public void setItems(ItemList items) {
+		this.items = items;
 	}
 
 	public ItemList getItems() {
