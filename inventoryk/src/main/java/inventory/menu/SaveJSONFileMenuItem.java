@@ -1,8 +1,9 @@
-package inventory.kalerantes;
+package inventory.menu;
 
 import java.util.Scanner;
 
 import formats.JsonFormat;
+import inventory.kalerantes.ItemList;
 
 public class SaveJSONFileMenuItem extends MenuItem {
 

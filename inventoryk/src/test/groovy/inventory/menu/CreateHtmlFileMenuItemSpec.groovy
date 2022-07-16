@@ -1,8 +1,8 @@
-package inventory.kalerantes
+package inventory.menu
 
 import formats.HtmlFormat
-import inventory.kalerantes.CreateHtmlFileMenuItem
 import inventory.kalerantes.ItemList
+import inventory.menu.CreateHtmlFileMenuItem
 import spock.lang.Specification
 
 class CreateHtmlFileMenuItemSpec extends Specification {

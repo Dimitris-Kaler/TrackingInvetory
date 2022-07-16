@@ -1,6 +1,9 @@
-package inventory.kalerantes;
+package inventory.menu;
 
 import java.util.Scanner;
+
+import inventory.kalerantes.Exit;
+import inventory.kalerantes.ItemList;
 
 public class ExitProgramMenuItem extends MenuItem {
 

@@ -1,4 +1,4 @@
-package inventory.kalerantes;
+package inventory.menu;
 
 public abstract class MenuItem implements MenuItemCommand  {
 

@@ -6,6 +6,8 @@ package inventory.kalerantes;
 import java.util.Scanner;
 
 import exceptions.InvalidMenuChoice;
+import inventory.menu.Menu;
+import inventory.menu.MenuItem;
 
 public class App {
 

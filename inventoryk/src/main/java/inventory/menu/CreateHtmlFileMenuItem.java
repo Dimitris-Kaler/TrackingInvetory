@@ -1,8 +1,9 @@
-package inventory.kalerantes;
+package inventory.menu;
 
 import java.util.Scanner;
 
 import formats.HtmlFormat;
+import inventory.kalerantes.ItemList;
 
 public class CreateHtmlFileMenuItem extends MenuItem {
 

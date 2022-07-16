@@ -1,8 +1,8 @@
-package inventory.kalerantes
+package inventory.menu
 
 import formats.JsonFormat
 import inventory.kalerantes.ItemList
-import inventory.kalerantes.SaveJSONFileMenuItem
+import inventory.menu.SaveJSONFileMenuItem
 import spock.lang.Specification
 
 class SaveJSONFileMenuItemSpec extends Specification {
@@ -32,7 +32,6 @@ class SaveJSONFileMenuItemSpec extends Specification {
 		then:
 		1 * mock.setItems(list)
 		1 * mock.createFileWithJsonFormat()
-
 	}
 
 }

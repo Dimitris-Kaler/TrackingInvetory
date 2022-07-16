@@ -1,8 +1,8 @@
-package inventory.kalerantes
+package inventory.menu
 
 import inventory.kalerantes.Exit
-import inventory.kalerantes.ExitProgramMenuItem
 import inventory.kalerantes.ItemList
+import inventory.menu.ExitProgramMenuItem
 import spock.lang.Specification
 
 class ExitProgramMenuItemSpec extends Specification {

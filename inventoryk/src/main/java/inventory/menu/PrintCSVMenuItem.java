@@ -1,8 +1,9 @@
-package inventory.kalerantes;
+package inventory.menu;
 
 import java.util.Scanner;
 
 import formats.CsvFormat;
+import inventory.kalerantes.ItemList;
 
 public class PrintCSVMenuItem extends MenuItem {
 

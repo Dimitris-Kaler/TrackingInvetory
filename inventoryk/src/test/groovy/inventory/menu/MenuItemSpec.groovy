@@ -1,6 +1,6 @@
-package inventory.kalerantes
+package inventory.menu
 
-import inventory.kalerantes.AddItemMenuItem
+import inventory.menu.AddItemMenuItem
 import spock.lang.Specification
 
 class MenuItemSpec extends Specification {
