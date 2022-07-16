@@ -11,6 +11,10 @@ public class HtmlFormat {
 
 	private ItemList items;
 
+	public HtmlFormat() {
+		this.items = new ItemList();
+	}
+
 	public HtmlFormat(ItemList items) {
 		this.items = items;
 	}

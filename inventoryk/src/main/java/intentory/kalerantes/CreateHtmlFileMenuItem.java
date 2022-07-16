@@ -6,15 +6,18 @@ import formats.HtmlFormat;
 
 public class CreateHtmlFileMenuItem extends MenuItem {
 
+	private HtmlFormat htmlFormatter;
+
 	public CreateHtmlFileMenuItem() {
 		super("3", "Save Inventory To Html file");
+		htmlFormatter = new HtmlFormat();
 	}
 
 	@Override
 	public void execute(ItemList list, Scanner scanner) {
-		HtmlFormat htmlformatter = new HtmlFormat(list);
+		htmlFormatter.setItems(list);
 		//TODO formatter and saving file are 2 different things
-		htmlformatter.createHtmlFile();
+		htmlFormatter.createHtmlFile();
 	}
 
 }

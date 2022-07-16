@@ -10,6 +10,7 @@ public class PrintHtmlMenuItem extends MenuItem {
 
 	public PrintHtmlMenuItem() {
 		super("2", "Print Out HTML format");
+		htmlFormat = new HtmlFormat();
 	}
 
 	@Override
