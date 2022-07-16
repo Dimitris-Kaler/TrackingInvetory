@@ -1,6 +1,8 @@
-package intentory.kalerantes
+package inventory.kalerantes
 
 import formats.CsvFormat
+import inventory.kalerantes.ItemList
+import inventory.kalerantes.PrintCSVMenuItem
 import spock.lang.Specification
 
 class PrintCSVMenuItemSpec extends Specification {

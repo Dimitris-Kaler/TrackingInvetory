@@ -1,6 +1,8 @@
-package intentory.kalerantes
+package inventory.kalerantes
 
 import exceptions.InvalidMenuItemCode
+import inventory.kalerantes.Menu
+import inventory.kalerantes.MenuItem
 import spock.lang.Specification
 import spock.lang.Unroll
 

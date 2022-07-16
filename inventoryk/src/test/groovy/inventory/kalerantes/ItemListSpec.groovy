@@ -1,5 +1,6 @@
-package intentory.kalerantes
+package inventory.kalerantes
 
+import inventory.kalerantes.ItemList
 import spock.lang.Ignore
 import spock.lang.Specification
 

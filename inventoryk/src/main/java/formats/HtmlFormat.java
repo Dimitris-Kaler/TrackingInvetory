@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import intentory.kalerantes.Item;
-import intentory.kalerantes.ItemList;
+import inventory.kalerantes.Item;
+import inventory.kalerantes.ItemList;
 
 public class HtmlFormat {
 

@@ -1,4 +1,4 @@
-package intentory.kalerantes;
+package inventory.kalerantes;
 
 public class Exit {
 

@@ -1,4 +1,4 @@
-package intentory.kalerantes
+package inventory.kalerantes
 
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -10,6 +10,7 @@ import exceptions.NullSerialNumberNotAllowedException;
 import exceptions.NullValueNotAllowedException;
 import exceptions.OneLetterNotAllowedException;
 import exceptions.SerialNumberLengthNotEqualNine;
+import inventory.kalerantes.Item
 
 
 

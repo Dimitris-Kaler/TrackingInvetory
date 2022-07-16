@@ -1,4 +1,4 @@
-package intentory.kalerantes;
+package inventory.kalerantes;
 
 import java.util.ArrayList;
 import java.util.List;

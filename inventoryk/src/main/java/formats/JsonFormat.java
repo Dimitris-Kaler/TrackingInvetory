@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import exceptions.NullItemListException;
-import intentory.kalerantes.ItemList;
+import inventory.kalerantes.ItemList;
 
 public class JsonFormat {
 
