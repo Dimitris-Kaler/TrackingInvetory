@@ -11,6 +11,14 @@ public class CsvFormat {
 		this.items = items;
 	}
 
+	public CsvFormat() {
+		this.items = new ItemList();
+	}
+
+	public void setItems(ItemList items) {
+		this.items = items;
+	}
+
 	public ItemList getItems() {
 		return items;
 	}

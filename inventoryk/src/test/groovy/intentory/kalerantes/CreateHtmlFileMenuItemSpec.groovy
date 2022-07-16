@@ -28,6 +28,7 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 		mi.execute(list, scanner)
 
 		then:
+		1 * mock.setItems(list)
 		1 * mock.createHtmlFile()
 	}
 

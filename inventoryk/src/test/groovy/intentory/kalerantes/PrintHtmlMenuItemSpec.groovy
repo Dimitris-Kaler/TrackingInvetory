@@ -33,6 +33,7 @@ class PrintHtmlMenuItemSpec extends Specification {
 		mi.execute(list, scanner)
 
 		then:
+		1 * htmlMock.setItems(list)
 		1 * htmlMock.printHtml()
 	}
 
