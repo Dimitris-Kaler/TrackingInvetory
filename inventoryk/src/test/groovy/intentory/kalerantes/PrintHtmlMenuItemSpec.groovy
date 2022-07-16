@@ -36,4 +36,5 @@ class PrintHtmlMenuItemSpec extends Specification {
 		1 * htmlMock.printHtml()
 	}
 
+
 }
