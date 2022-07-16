@@ -8,16 +8,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import exceptions.NullItemListException;
-import intentory.kalerantes.Item;
 import intentory.kalerantes.ItemList;
 
 public class JsonFormat {
 
 	private ItemList items;
 
+	public JsonFormat() {
+		items = new ItemList();
+	}
+
 	public JsonFormat(ItemList items) {
 		this.items = items;
+	}
 
+	public void setItems(ItemList items) {
+		this.items = items;
 	}
 
 	public ItemList getItems() {

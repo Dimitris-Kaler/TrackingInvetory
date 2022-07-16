@@ -6,15 +6,17 @@ import formats.JsonFormat;
 
 public class SaveJSONFileMenuItem extends MenuItem {
 
+	private JsonFormat jsonFormat;
+
 	public SaveJSONFileMenuItem() {
 		super("5", "Save Inventory to Json file");
+		jsonFormat = new JsonFormat();
 	}
 
 	@Override
 	public void execute(ItemList list, Scanner scanner) {
-		JsonFormat jFormat = new JsonFormat(list);
-		//TODO this one fails
-		jFormat.createFileWithJsonFormat();
+		jsonFormat.setItems(list);
+		jsonFormat.createFileWithJsonFormat();
 	}
 
 }
