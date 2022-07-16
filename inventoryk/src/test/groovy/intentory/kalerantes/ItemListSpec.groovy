@@ -1,10 +1,12 @@
 package intentory.kalerantes
 
+import spock.lang.Ignore
 import spock.lang.Specification
 
 
 
 class ItemListSpec extends Specification {
+
 
 
 	def "create item list"(){
@@ -14,6 +16,9 @@ class ItemListSpec extends Specification {
 		then:
 		li.getLi()==new ArrayList();
 	}
+
+	//TODO the fact that this test is using the scanner is a code smell
+	@Ignore
 	def "Add Item with Scanner"(){
 		setup:
 		Scanner scanner=new Scanner(System.in)
