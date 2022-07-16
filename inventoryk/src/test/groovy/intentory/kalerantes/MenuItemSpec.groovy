@@ -10,7 +10,7 @@ class MenuItemSpec extends Specification {
 
 		then:
 		mi.code == "1"
-		mi.description == "description"
+		mi.description == "Add Item"
 	}
 
 }
