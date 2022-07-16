@@ -6,8 +6,8 @@ import formats.JsonFormat;
 
 public class SaveJSONFileMenuItem extends MenuItem {
 
-	public SaveJSONFileMenuItem(String code, String description) {
-		super(code, description);
+	public SaveJSONFileMenuItem() {
+		super("5", "Save Inventory to Json file");
 	}
 
 	@Override

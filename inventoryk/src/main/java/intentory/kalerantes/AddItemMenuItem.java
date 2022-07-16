@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class AddItemMenuItem extends MenuItem {
 
-	public AddItemMenuItem(String code, String description) {
-		super(code, description);
+	public AddItemMenuItem() {
+		super("1", "Add Item");
 	}
 
 	@Override

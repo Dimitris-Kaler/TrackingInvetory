@@ -6,8 +6,8 @@ import formats.HtmlFormat;
 
 public class PrintHtmlMenuItem extends MenuItem {
 
-	public PrintHtmlMenuItem(String code, String description) {
-		super(code, description);
+	public PrintHtmlMenuItem() {
+		super("2", "Print Out HTML format");
 	}
 
 	@Override

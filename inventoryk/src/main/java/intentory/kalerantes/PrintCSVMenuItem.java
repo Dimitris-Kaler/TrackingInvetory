@@ -6,8 +6,8 @@ import formats.CsvFormat;
 
 public class PrintCSVMenuItem extends MenuItem {
 
-	public PrintCSVMenuItem(String code, String description) {
-		super(code, description);
+	public PrintCSVMenuItem() {
+		super("4", "Print Out Csv format");
 	}
 
 	@Override

@@ -6,8 +6,8 @@ import formats.HtmlFormat;
 
 public class CreateHtmlFileMenuItem extends MenuItem {
 
-	public CreateHtmlFileMenuItem(String code, String description) {
-		super(code, description);
+	public CreateHtmlFileMenuItem() {
+		super("3", "Save Inventory To Html file");
 	}
 
 	@Override

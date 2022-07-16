@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class ExitProgramMenuItem extends MenuItem {
 
-	public ExitProgramMenuItem(String code, String description) {
-		super(code, description);
+	public ExitProgramMenuItem() {
+		super("6", "Exit The program");
 	}
 
 	@Override
