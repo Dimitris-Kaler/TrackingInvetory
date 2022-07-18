@@ -13,7 +13,7 @@ public class AddItemMenuItem extends MenuItem {
 	@Override
 	public void execute(ItemList list, Scanner scanner) {
 		scanner.nextLine();
-		list.addItem(scanner);
+		list.addItem(scanner, System.out);
 	}
 
 }

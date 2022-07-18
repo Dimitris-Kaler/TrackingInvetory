@@ -29,6 +29,8 @@ public class Menu {
 			if (mi.getCode().equals(code))
 				return mi;
 
+		System.out.println(code);
+
 		throw new InvalidMenuItemCode();
 	}
 
