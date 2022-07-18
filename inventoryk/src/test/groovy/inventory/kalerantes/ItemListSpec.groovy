@@ -1,14 +1,9 @@
 package inventory.kalerantes
 
-import inventory.kalerantes.ItemList
 import spock.lang.Ignore
 import spock.lang.Specification
 
-
-
 class ItemListSpec extends Specification {
-
-
 
 	def "create item list"(){
 		when:

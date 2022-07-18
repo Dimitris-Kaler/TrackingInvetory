@@ -17,6 +17,8 @@ public class ItemList {
 		return li;
 	}
 
+
+	//TODO this piece of code has to do with parsing from command line and not with items list
 	public void addItem(Scanner scanner) {
 		System.out.print("Item name: ");
 		String name = scanner.next();
@@ -24,6 +26,7 @@ public class ItemList {
 		String SerialNumber = scanner.next();
 		System.out.print("Item value: ");
 		BigDecimal value = scanner.nextBigDecimal();
+		//TODO you do not handle InputMismatch
 
 		Item item = new Item(name, SerialNumber, value);
 		getLi().add(item);
