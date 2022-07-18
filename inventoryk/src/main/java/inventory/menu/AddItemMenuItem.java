@@ -9,14 +9,23 @@ import inventory.kalerantes.ItemList;
 
 public class AddItemMenuItem extends MenuItem {
 
+	ItemCLIParser parser;
+
 	public AddItemMenuItem() {
-		super("1", "Add Item");
+		this(new ItemCLIParser());
 	}
+
+	public AddItemMenuItem(ItemCLIParser parser) {
+		super("1", "Add Item");
+		this.parser = parser;
+	}
+
 
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
+		//TODO why do you need that line?
 		scanner.nextLine();
-		Item item = new ItemCLIParser().parseItem(scanner, out);
+		Item item = parser.parseItem(scanner, out);
 		list.addItem(item);
 		//TODO why do you need that line?
 //		scanner.nextLine();
