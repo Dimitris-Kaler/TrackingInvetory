@@ -2,7 +2,6 @@ package inventory.menu
 
 import inventory.kalerantes.Exit
 import inventory.kalerantes.ItemList
-import inventory.menu.ExitProgramMenuItem
 import spock.lang.Specification
 
 class ExitProgramMenuItemSpec extends Specification {
@@ -32,7 +31,7 @@ class ExitProgramMenuItemSpec extends Specification {
 		ItemList list = new ItemList()
 
 		when:
-		mi.execute(list, scanner)
+		mi.execute(list, scanner, System.out) //TODO capture and assert the output
 
 		then:
 		1 * mock.doIt()

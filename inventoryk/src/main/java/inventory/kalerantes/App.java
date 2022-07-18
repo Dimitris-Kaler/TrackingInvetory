@@ -22,7 +22,7 @@ public class App {
 				printMenuOptions();
 				String choice = parseInputFromCommandLine(scanner);
 				MenuItem menuItemSelected = menu.findByCode(choice);
-				menuItemSelected.execute(list, scanner);
+				menuItemSelected.execute(list, scanner, System.out);
 			}
 		}
 	}

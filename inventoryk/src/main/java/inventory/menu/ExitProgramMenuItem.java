@@ -1,5 +1,6 @@
 package inventory.menu;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import inventory.kalerantes.Exit;
@@ -15,7 +16,7 @@ public class ExitProgramMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list, Scanner scanner) {
+	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		System.out.println(message());
 		exit.doIt();
 	}

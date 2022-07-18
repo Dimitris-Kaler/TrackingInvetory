@@ -2,7 +2,6 @@ package inventory.menu
 
 import formats.HtmlFormat
 import inventory.kalerantes.ItemList
-import inventory.menu.CreateHtmlFileMenuItem
 import spock.lang.Specification
 
 class CreateHtmlFileMenuItemSpec extends Specification {
@@ -27,7 +26,7 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 		ItemList list = new ItemList()
 
 		when:
-		mi.execute(list, scanner)
+		mi.execute(list, scanner, System.out) //TODO capture and assert the output
 
 		then:
 		1 * mock.setItems(list)

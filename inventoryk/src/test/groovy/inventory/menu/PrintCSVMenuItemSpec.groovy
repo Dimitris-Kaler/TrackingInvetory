@@ -2,7 +2,6 @@ package inventory.menu
 
 import formats.CsvFormat
 import inventory.kalerantes.ItemList
-import inventory.menu.PrintCSVMenuItem
 import spock.lang.Specification
 
 class PrintCSVMenuItemSpec extends Specification {
@@ -31,7 +30,7 @@ class PrintCSVMenuItemSpec extends Specification {
 		ItemList list = new ItemList()
 
 		when:
-		mi.execute(list, scanner)
+		mi.execute(list, scanner, System.out) //TODO capture and assert the output
 
 		then:
 		1 * mock.setItems(list)

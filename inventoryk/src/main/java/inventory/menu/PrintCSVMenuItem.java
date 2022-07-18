@@ -1,5 +1,6 @@
 package inventory.menu;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import formats.CsvFormat;
@@ -15,7 +16,7 @@ public class PrintCSVMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list, Scanner scanner) {
+	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		csvFormatter.setItems(list);
 		System.out.println(messageHeader());
 		System.out.println(csvFormatter.printCsv() + "\n");

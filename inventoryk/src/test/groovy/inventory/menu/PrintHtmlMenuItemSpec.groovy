@@ -2,7 +2,6 @@ package inventory.menu
 
 import formats.HtmlFormat
 import inventory.kalerantes.ItemList
-import inventory.menu.PrintHtmlMenuItem
 import spock.lang.Specification
 
 class PrintHtmlMenuItemSpec extends Specification {
@@ -32,7 +31,7 @@ class PrintHtmlMenuItemSpec extends Specification {
 		mi.htmlFormat = htmlMock
 
 		when:
-		mi.execute(list, scanner)
+		mi.execute(list, scanner, System.out) //TODO capture and assert the output
 
 		then:
 		1 * htmlMock.setItems(list)

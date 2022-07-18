@@ -1,5 +1,6 @@
 package inventory.menu;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import formats.HtmlFormat;
@@ -15,7 +16,7 @@ public class PrintHtmlMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list, Scanner scanner) {
+	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		htmlFormat.setItems(list);
 		System.out.println(headerMessage());
 		System.out.println(htmlFormat.printHtml());

@@ -1,5 +1,6 @@
 package inventory.menu;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import formats.JsonFormat;
@@ -15,7 +16,7 @@ public class SaveJSONFileMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list, Scanner scanner) {
+	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		jsonFormat.setItems(list);
 		jsonFormat.createFileWithJsonFormat();
 	}

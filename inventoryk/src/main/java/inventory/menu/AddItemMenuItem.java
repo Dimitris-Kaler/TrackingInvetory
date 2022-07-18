@@ -1,7 +1,10 @@
 package inventory.menu;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
+import inventory.kalerantes.Item;
+import inventory.kalerantes.ItemCLIParser;
 import inventory.kalerantes.ItemList;
 
 public class AddItemMenuItem extends MenuItem {
@@ -11,9 +14,13 @@ public class AddItemMenuItem extends MenuItem {
 	}
 
 	@Override
-	public void execute(ItemList list, Scanner scanner) {
+	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		scanner.nextLine();
-		list.addItem(scanner, System.out);
+		Item item = new ItemCLIParser().parseItem(scanner, out);
+		list.addItem(item);
+		//TODO why do you need that line?
+//		scanner.nextLine();
+		out.println("The item has succesfully submitted to the ItemList");
 	}
 
 }
