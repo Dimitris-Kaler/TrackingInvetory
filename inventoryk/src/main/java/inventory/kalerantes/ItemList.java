@@ -1,7 +1,6 @@
 package inventory.kalerantes;
 
 import java.io.PrintStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,18 +20,13 @@ public class ItemList {
 
 	//TODO this piece of code has to do with parsing from command line and not with items list
 	public void addItem(Scanner scanner, PrintStream out) {
-		out.print("Item name: ");
-		String name = scanner.next();
-		out.print("Item serial number: ");
-		String SerialNumber = scanner.next();
-		out.print("Item value: ");
-		BigDecimal value = scanner.nextBigDecimal();
-//		TODO you do not handle InputMismatch
-		Item item = new Item(name, SerialNumber, value);
+		Item item = new ItemCLIParser().parseItem(scanner, out);
 		getLi().add(item);
 		//TODO why do you need that line?
 //		scanner.nextLine();
 		out.println("The item has succesfully submitted to the ItemList");
 	}
+
+
 
 }

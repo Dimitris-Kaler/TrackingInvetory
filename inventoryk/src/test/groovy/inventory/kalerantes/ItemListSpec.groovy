@@ -1,6 +1,5 @@
 package inventory.kalerantes
 
-import spock.lang.Ignore
 import spock.lang.Specification
 
 class ItemListSpec extends Specification {
@@ -49,20 +48,6 @@ class ItemListSpec extends Specification {
 		new ByteArrayInputStream((name + System.lineSeparator() + sn + System.lineSeparator() + value).getBytes());
 	}
 
-	//TODO the fact that this test is using the scanner is a code smell
-	@Ignore
-	def "Add Item with Scanner"(){
-		setup:
-		Scanner scanner=new Scanner(System.in)
-		ItemList li=new ItemList()
-
-		when:
-		def result=li.getLi().size()
-		li.addItem(scanner)
-
-		then:
-		result<li.getLi().size()
-	}
 }
 
 
