@@ -7,7 +7,13 @@ import exceptions.InvalidMenuChoice
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class AppTest extends Specification {
+class UISpec extends Specification {
+
+	UI ui
+
+	def setup() {
+		ui = new UI()
+	}
 
 	//TODO the following two test are Integration tests. They can be simplified when app class is simplified
 	@Unroll
@@ -17,7 +23,7 @@ class AppTest extends Specification {
 		Scanner scanner = new Scanner(input)
 
 		when:
-		App.validateChoice(scanner)
+		ui.validateChoice(scanner)
 
 		then:
 		def e = thrown(InvalidMenuChoice)
@@ -34,7 +40,7 @@ class AppTest extends Specification {
 		Scanner scanner = new Scanner(input)
 
 		when:
-		App.validateChoice(scanner)
+		ui.validateChoice(scanner)
 
 		then:
 		notThrown(InvalidMenuChoice)
@@ -48,7 +54,7 @@ class AppTest extends Specification {
 		PrintStream out = new PrintStream(captureOutput)
 
 		when:
-		App.prompt(out)
+		ui.prompt(out)
 
 		then:
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
