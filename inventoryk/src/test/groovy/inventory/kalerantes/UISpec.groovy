@@ -23,8 +23,11 @@ class UISpec extends Specification {
 		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
 		Scanner scanner = new Scanner(input)
 
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
 		when:
-		ui.validateChoice(scanner)
+		ui.validateChoice(scanner, out)
 
 		then:
 		def e = thrown(InvalidMenuChoice)
@@ -40,8 +43,11 @@ class UISpec extends Specification {
 		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
 		Scanner scanner = new Scanner(input)
 
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
 		when:
-		ui.validateChoice(scanner)
+		ui.validateChoice(scanner, out)
 
 		then:
 		notThrown(InvalidMenuChoice)
@@ -79,5 +85,88 @@ class UISpec extends Specification {
 		captureOutput.toString() == options + System.lineSeparator()
 
 	}
+
+	def "parse input with valid choice"() {
+		given:
+		def userKeys = "1" + System.lineSeparator()
+		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
+		Scanner scanner = new Scanner(input)
+
+		CLIMenuChoiceValidator stub = Stub()
+		ui.cliMenuChoiceValidator = stub
+
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
+		when:
+		String choice = ui.parseInputFromCommandLine(scanner, out)
+
+		then:
+		choice == "1"
+		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:1${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+	}
+
+
+	def "parse invalid input"() {
+		given:
+		def userKeys = "a" + System.lineSeparator()
+		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
+		Scanner scanner = new Scanner(input)
+
+		CLIMenuChoiceValidator stub = Stub()
+		stub.validate(_) >> {throw new RuntimeException("fail")}
+		ui.cliMenuChoiceValidator = stub
+
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
+		when:
+		String choice = ui.parseInputFromCommandLine(scanner, out)
+
+		then:
+		choice == null
+		notThrown(Exception)
+
+		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:a${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+		//TODO capture system error
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

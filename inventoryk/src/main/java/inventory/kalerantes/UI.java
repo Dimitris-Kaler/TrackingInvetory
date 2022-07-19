@@ -10,13 +10,16 @@ public class UI {
 
 	private ItemList list;
 	private Menu menu;
+	private CLIMenuChoiceValidator cliMenuChoiceValidator;
 
 	public UI() {
 		list = new ItemList();
 		menu = new Menu();
+		cliMenuChoiceValidator = new CLIMenuChoiceValidator();
 	}
 
 	public UI(Menu menu) {
+		this();
 		this.menu = menu;
 	}
 
@@ -25,7 +28,7 @@ public class UI {
 			boolean loop = true;
 			while (loop) {
 				printMenuOptions(System.out);
-				String choice = parseInputFromCommandLine(scanner);
+				String choice = parseInputFromCommandLine(scanner, System.out);
 				MenuItem menuItemSelected = menu.findByCode(choice);
 				menuItemSelected.execute(list, scanner, System.out);
 			}
@@ -36,28 +39,25 @@ public class UI {
 		out.println(menu.options());
 	}
 
-	private String parseInputFromCommandLine(Scanner sc) {
-		prompt(System.out);
+	private String parseInputFromCommandLine(Scanner sc, PrintStream out) {
+		prompt(out);
 		while(sc.hasNext()) {
 			try {
-				return validateChoice(sc);
+				return validateChoice(sc, out);
 			} catch (Exception e) {
-				handleException(e);
+				System.err.println(e.getMessage());
 			}
 			finally {
-				prompt(System.out);
+				prompt(out);
 			}
 		}
 		return null;
 	}
 
-	private void handleException(Exception e) {
-		System.err.println(e.getMessage());
-	}
-
-	private String validateChoice(Scanner sc) {
+	private String validateChoice(Scanner sc, PrintStream out) {
 		String choice = sc.next();
-		new CLIMenuChoiceValidator().validate(choice);
+		out.println("Choice:" + choice);
+		cliMenuChoiceValidator.validate(choice);
 		return choice;
 	}
 
