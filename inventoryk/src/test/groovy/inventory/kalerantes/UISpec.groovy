@@ -44,7 +44,9 @@ class UISpec extends Specification {
 		Scanner scanner = new Scanner(input)
 
 		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
 
 		when:
 		ui.validateChoice(scanner, out)
@@ -59,7 +61,9 @@ class UISpec extends Specification {
 	def prompt() {
 		given:
 		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
 
 		when:
 		ui.prompt(out)
@@ -76,7 +80,9 @@ class UISpec extends Specification {
 		ui = new UI(menu)
 
 		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
 
 		when:
 		ui.printMenuOptions(out)
@@ -96,14 +102,17 @@ class UISpec extends Specification {
 		ui.cliMenuChoiceValidator = stub
 
 		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
 
 		when:
-		String choice = ui.parseInputFromCommandLine(scanner, out)
+		String choice = ui.parseInputFromCommandLine(scanner, out, err)
 
 		then:
 		choice == "1"
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:1${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+		captureOutputError.toString() == ""
 	}
 
 
@@ -118,55 +127,18 @@ class UISpec extends Specification {
 		ui.cliMenuChoiceValidator = stub
 
 		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
 
 		when:
-		String choice = ui.parseInputFromCommandLine(scanner, out)
+		String choice = ui.parseInputFromCommandLine(scanner, out, err)
 
 		then:
 		choice == null
 		notThrown(Exception)
-
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:a${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
-		//TODO capture system error
+		captureOutputError.toString() == "fail${System.lineSeparator()}"
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

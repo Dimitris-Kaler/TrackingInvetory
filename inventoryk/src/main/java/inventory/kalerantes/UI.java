@@ -28,7 +28,7 @@ public class UI {
 			boolean loop = true;
 			while (loop) {
 				printMenuOptions(System.out);
-				String choice = parseInputFromCommandLine(scanner, System.out);
+				String choice = parseInputFromCommandLine(scanner, System.out, System.err);
 				MenuItem menuItemSelected = menu.findByCode(choice);
 				menuItemSelected.execute(list, scanner, System.out);
 			}
@@ -39,13 +39,13 @@ public class UI {
 		out.println(menu.options());
 	}
 
-	private String parseInputFromCommandLine(Scanner sc, PrintStream out) {
+	private String parseInputFromCommandLine(Scanner sc, PrintStream out, PrintStream err) {
 		prompt(out);
 		while(sc.hasNext()) {
 			try {
 				return validateChoice(sc, out);
 			} catch (Exception e) {
-				System.err.println(e.getMessage());
+				err.println(e.getMessage());
 			}
 			finally {
 				prompt(out);
