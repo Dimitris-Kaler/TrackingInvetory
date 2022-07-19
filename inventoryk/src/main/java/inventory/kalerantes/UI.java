@@ -16,11 +16,15 @@ public class UI {
 		menu = new Menu();
 	}
 
+	public UI(Menu menu) {
+		this.menu = menu;
+	}
+
 	public void run() {
 		try (Scanner scanner = new Scanner(System.in)) {
 			boolean loop = true;
 			while (loop) {
-				printMenuOptions();
+				printMenuOptions(System.out);
 				String choice = parseInputFromCommandLine(scanner);
 				MenuItem menuItemSelected = menu.findByCode(choice);
 				menuItemSelected.execute(list, scanner, System.out);
@@ -28,8 +32,8 @@ public class UI {
 		}
 	}
 
-	private void printMenuOptions() {
-		System.out.println(menu.options());
+	private void printMenuOptions(PrintStream out) {
+		out.println(menu.options());
 	}
 
 	private String parseInputFromCommandLine(Scanner sc) {

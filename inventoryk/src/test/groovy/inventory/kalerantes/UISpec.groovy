@@ -4,6 +4,7 @@
 package inventory.kalerantes
 
 import exceptions.InvalidMenuChoice
+import inventory.menu.Menu
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -50,6 +51,7 @@ class UISpec extends Specification {
 	}
 
 	def prompt() {
+		given:
 		OutputStream captureOutput = new ByteArrayOutputStream()
 		PrintStream out = new PrintStream(captureOutput)
 
@@ -58,6 +60,24 @@ class UISpec extends Specification {
 
 		then:
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
+	}
+
+	def printMenuOptions() {
+		given:
+		Menu menu = Stub()
+		String options = "option1${System.lineSeparator()}option2"
+		menu.options() >> options
+		ui = new UI(menu)
+
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
+		when:
+		ui.printMenuOptions(out)
+
+		then:
+		captureOutput.toString() == options + System.lineSeparator()
+
 	}
 
 }
