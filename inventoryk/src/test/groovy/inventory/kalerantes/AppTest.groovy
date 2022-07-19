@@ -4,7 +4,6 @@
 package inventory.kalerantes
 
 import exceptions.InvalidMenuChoice
-import inventory.kalerantes.App
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -33,6 +32,17 @@ class AppTest extends Specification {
 
 		where:
 		choice << ("1".."6")
+	}
+
+	def prompt() {
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
+		when:
+		App.prompt(out)
+
+		then:
+		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
 	}
 
 }

@@ -3,6 +3,7 @@
  */
 package inventory.kalerantes;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import exceptions.InvalidMenuChoice;
@@ -32,7 +33,7 @@ public class App {
 	}
 
 	private static String parseInputFromCommandLine(Scanner sc) {
-		prompt();
+		prompt(System.out);
 		while(sc.hasNext()) {
 			try {
 				return validateChoice(sc);
@@ -40,7 +41,7 @@ public class App {
 				handleException(e);
 			}
 			finally {
-				prompt();
+				prompt(System.out);
 			}
 		}
 		return null;
@@ -56,8 +57,8 @@ public class App {
 		return choice;
 	}
 
-	private static void prompt() {
-		System.out.println("Enter choice: ");
+	private static void prompt(PrintStream out) {
+		out.println("Enter choice: ");
 	}
 
 	public static void acceptChoice(String choice) {
