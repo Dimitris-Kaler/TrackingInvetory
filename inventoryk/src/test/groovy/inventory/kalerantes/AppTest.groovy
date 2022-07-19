@@ -9,10 +9,15 @@ import spock.lang.Unroll
 
 class AppTest extends Specification {
 
+	//TODO the following two test are Integration tests. They can be simplified when app class is simplified
 	@Unroll
 	def "accept input throws exception if not between 1 and 6"() {
+		given:
+		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
+		Scanner scanner = new Scanner(input)
+
 		when:
-		App.acceptChoice(choice)
+		App.validateChoice(scanner)
 
 		then:
 		def e = thrown(InvalidMenuChoice)
@@ -24,8 +29,12 @@ class AppTest extends Specification {
 
 	@Unroll
 	def "accept input only between 1 and 6" () {
+		given:
+		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
+		Scanner scanner = new Scanner(input)
+
 		when:
-		App.acceptChoice(choice)
+		App.validateChoice(scanner)
 
 		then:
 		notThrown(InvalidMenuChoice)

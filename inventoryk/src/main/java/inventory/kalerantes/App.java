@@ -6,7 +6,6 @@ package inventory.kalerantes;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import exceptions.InvalidMenuChoice;
 import inventory.menu.Menu;
 import inventory.menu.MenuItem;
 
@@ -53,30 +52,12 @@ public class App {
 
 	private static String validateChoice(Scanner sc) {
 		String choice = sc.next();
-		acceptChoice(choice);
+		new CLIMenuChoiceValidator().validate(choice);
 		return choice;
 	}
 
 	private static void prompt(PrintStream out) {
 		out.println("Enter choice: ");
 	}
-
-	public static void acceptChoice(String choice) {
-		validateInBounds(validateInteger(choice));
-	}
-
-	private static void validateInBounds(int value) {
-		if (value < 1 || value > 6)
-			throw new InvalidMenuChoice(String.valueOf(value));
-	}
-
-	private static int validateInteger(String choice) {
-		try {
-			return Integer.parseInt(choice);
-		} catch (NumberFormatException e) {
-			throw new InvalidMenuChoice(choice);
-		}
-	}
-
 
 }
