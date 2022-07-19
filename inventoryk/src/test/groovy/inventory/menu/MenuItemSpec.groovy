@@ -49,6 +49,8 @@ class MenuItemSpec extends Specification {
 		1 * out.println("The item has succesfully submitted to the ItemList")
 	}
 
+
+	//TODO there is duplication to be handled
 	def "when executing, parsing fails"() {
 		given: "an item list"
 		ItemList list = new ItemList()
@@ -71,6 +73,30 @@ class MenuItemSpec extends Specification {
 
 		then:
 		1 * out.println("fail")
+	}
+
+	def "when executing, parsing fails and an exception with no message is thrown"() {
+		given: "an item list"
+		ItemList list = new ItemList()
+
+		and: "a simulated user input"
+		def input = new ByteArrayInputStream((System.lineSeparator()).getBytes());
+		Scanner scanner = new Scanner(input)
+
+		and:
+		PrintStream out = Mock()
+
+		and: "parsing fails"
+		ItemCLIParser badStub = Stub(ItemCLIParser)
+		badStub.parseItem(scanner, out) >> { throw new RuntimeException() }
+
+		mi = new AddItemMenuItem(badStub);
+
+		when: "executing the menu item"
+		mi.execute(list, scanner, out)
+
+		then:
+		1 * out.println("Unexpected Error: class java.lang.RuntimeException")
 	}
 
 	private Item item() {

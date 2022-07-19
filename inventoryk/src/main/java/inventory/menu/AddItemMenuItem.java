@@ -20,7 +20,6 @@ public class AddItemMenuItem extends MenuItem {
 		this.parser = parser;
 	}
 
-
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		//TODO why do you need that line?
@@ -32,7 +31,10 @@ public class AddItemMenuItem extends MenuItem {
 //		scanner.nextLine();
 			out.println("The item has succesfully submitted to the ItemList");
 		} catch (Exception e) {
-			out.println(e.getMessage());
+			if (e.getMessage() != null)
+				out.println(e.getMessage());
+			else
+				out.println("Unexpected Error: " + e.getClass().toString());
 		}
 	}
 
