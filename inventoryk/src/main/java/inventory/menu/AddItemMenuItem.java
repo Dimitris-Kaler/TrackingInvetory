@@ -25,11 +25,15 @@ public class AddItemMenuItem extends MenuItem {
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		//TODO why do you need that line?
 		scanner.nextLine();
-		Item item = parser.parseItem(scanner, out);
-		list.addItem(item);
-		//TODO why do you need that line?
+		try {
+			Item item = parser.parseItem(scanner, out);
+			list.addItem(item);
+			//TODO why do you need that line?
 //		scanner.nextLine();
-		out.println("The item has succesfully submitted to the ItemList");
+			out.println("The item has succesfully submitted to the ItemList");
+		} catch (Exception e) {
+			out.println(e.getMessage());
+		}
 	}
 
 }

@@ -49,6 +49,30 @@ class MenuItemSpec extends Specification {
 		1 * out.println("The item has succesfully submitted to the ItemList")
 	}
 
+	def "when executing, parsing fails"() {
+		given: "an item list"
+		ItemList list = new ItemList()
+
+		and: "a simulated user input"
+		def input = new ByteArrayInputStream((System.lineSeparator()).getBytes());
+		Scanner scanner = new Scanner(input)
+
+		and:
+		PrintStream out = Mock()
+
+		and: "parsing fails"
+		ItemCLIParser badStub = Stub(ItemCLIParser)
+		badStub.parseItem(scanner, out) >> { throw new RuntimeException("fail") }
+
+		mi = new AddItemMenuItem(badStub);
+
+		when: "executing the menu item"
+		mi.execute(list, scanner, out)
+
+		then:
+		1 * out.println("fail")
+	}
+
 	private Item item() {
 		new Item("name", "123456789", 20)
 	}
