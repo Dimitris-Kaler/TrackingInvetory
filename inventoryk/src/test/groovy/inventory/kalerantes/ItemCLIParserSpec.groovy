@@ -32,6 +32,29 @@ class ItemCLIParserSpec extends Specification {
 		captureOutput.toString() == "Item name: Item serial number: Item value: "
 	}
 
+	def "demo why scanner.nextBigDecimal is a problem"() {
+		given:
+		String name = "name"
+		String sn = "123456789"
+		String value = "abc"
+
+		and: 'a scanner that simulates the user input'
+		Scanner scanner = new Scanner(simulateUserInput(name, sn, value))
+
+		and: 'and print stream for capturing program output'
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+
+		when: 'parsing an item'
+		Item item = new ItemCLIParser().parseItem(scanner, out)
+
+		then:
+		thrown(InputMismatchException)
+		//TODO normally this test should fail
+		//the value remains in the scanner
+		scanner.next() == value
+	}
+
 	private def simulateUserInput(String name, String sn, String value) {
 		new ByteArrayInputStream((name + System.lineSeparator() + sn + System.lineSeparator() + value).getBytes());
 	}
