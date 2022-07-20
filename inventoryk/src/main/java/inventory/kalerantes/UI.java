@@ -25,14 +25,17 @@ public class UI {
 
 	public void run() {
 		try (Scanner scanner = new Scanner(System.in)) {
-			boolean loop = true;
-			while (loop) {
-				printMenuOptions(System.out);
-				String choice = parseInputFromCommandLine(scanner, System.out, System.err);
-				MenuItem menuItemSelected = menu.findByCode(choice);
-				menuItemSelected.execute(list, scanner, System.out);
+			while (true) {
+				dotIt(scanner, System.out, System.err);
 			}
 		}
+	}
+
+	private void dotIt(Scanner scanner, PrintStream out, PrintStream err) {
+		printMenuOptions(out);
+		String choice = parseInputFromCommandLine(scanner, out, err);
+		MenuItem menuItemSelected = menu.findByCode(choice);
+		menuItemSelected.execute(list, scanner, out);
 	}
 
 	private void printMenuOptions(PrintStream out) {

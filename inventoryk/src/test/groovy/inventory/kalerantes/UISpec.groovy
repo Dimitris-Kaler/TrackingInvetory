@@ -5,6 +5,7 @@ package inventory.kalerantes
 
 import exceptions.InvalidMenuChoice
 import inventory.menu.Menu
+import inventory.menu.MenuItem
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -139,6 +140,31 @@ class UISpec extends Specification {
 		notThrown(Exception)
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:a${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
 		captureOutputError.toString() == "fail${System.lineSeparator()}"
+	}
+
+	def doIt() {
+		given:
+		def userKeys = "1" + System.lineSeparator()
+		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
+		Scanner scanner = new Scanner(input)
+
+		OutputStream captureOutput = new ByteArrayOutputStream()
+		OutputStream captureOutputError = new ByteArrayOutputStream()
+		PrintStream out = new PrintStream(captureOutput)
+		PrintStream err = new PrintStream(captureOutputError)
+
+		Menu menuStub = Mock()
+		ui.menu = menuStub
+
+		MenuItem menuItemMock = Mock()
+
+		when:
+		ui.dotIt(scanner, out, err)
+
+		then:
+		1 * menuStub.options()
+		1 * menuStub.findByCode("1") >>  menuItemMock
+		1 * menuItemMock.execute(ui.list, scanner, out)
 	}
 
 }
