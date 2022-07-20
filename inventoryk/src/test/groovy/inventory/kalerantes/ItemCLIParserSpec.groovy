@@ -1,5 +1,6 @@
 package inventory.kalerantes
 
+import exceptions.ValueNotNumeric
 import spock.lang.Specification
 
 class ItemCLIParserSpec extends Specification {
@@ -32,7 +33,7 @@ class ItemCLIParserSpec extends Specification {
 		captureOutput.toString() == "Item name: Item serial number: Item value: "
 	}
 
-	def "demo why scanner.nextBigDecimal is a problem"() {
+	def "no numeric value for item's value"() {
 		given:
 		String name = "name"
 		String sn = "123456789"
@@ -49,10 +50,17 @@ class ItemCLIParserSpec extends Specification {
 		Item item = new ItemCLIParser().parseItem(scanner, out)
 
 		then:
-		thrown(InputMismatchException)
-		//TODO normally this test should fail
-		//the value remains in the scanner
-		scanner.next() == value
+		def e = thrown(ValueNotNumeric)
+		e.message == "Expected numeric value for item's value but got 'abc' instead"
+		boolean flag = false;
+		try {
+			scanner.next()
+		}
+		catch(NoSuchElementException e1) {
+			flag = true
+		}
+		assert flag
+
 	}
 
 	private def simulateUserInput(String name, String sn, String value) {

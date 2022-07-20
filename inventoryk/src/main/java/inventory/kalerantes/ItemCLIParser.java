@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+import exceptions.ValueNotNumeric;
+
 public class ItemCLIParser {
 
 	public Item parseItem(Scanner scanner, PrintStream out) {
@@ -12,9 +14,15 @@ public class ItemCLIParser {
 		out.print("Item serial number: ");
 		String SerialNumber = scanner.next();
 		out.print("Item value: ");
-		BigDecimal value = scanner.nextBigDecimal();
-//		TODO you do not handle InputMismatch
-		return new Item(name, SerialNumber, value);
+		String valueString = scanner.next();
+		BigDecimal value;
+		try {
+			value = new BigDecimal(valueString);
+			return new Item(name, SerialNumber, value);
+		} catch (NumberFormatException e) {
+			throw new ValueNotNumeric(valueString);
+		}
+
 	}
 
 }
