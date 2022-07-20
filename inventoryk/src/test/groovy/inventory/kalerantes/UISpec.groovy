@@ -112,7 +112,7 @@ class UISpec extends Specification {
 
 		then:
 		choice == "1"
-		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:1${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+		captureOutput.toString() == ""
 		captureOutputError.toString() == ""
 	}
 
@@ -138,7 +138,7 @@ class UISpec extends Specification {
 		then:
 		choice == null
 		notThrown(Exception)
-		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}Choice:a${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
 		captureOutputError.toString() == "fail${System.lineSeparator()}"
 	}
 
@@ -162,9 +162,10 @@ class UISpec extends Specification {
 		ui.dotIt(scanner, out, err)
 
 		then:
-		1 * menuStub.options()
+		1 * menuStub.options() >> { "options" }
 		1 * menuStub.findByCode("1") >>  menuItemMock
 		1 * menuItemMock.execute(ui.list, scanner, out)
+		captureOutput.toString() == "options${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
 	}
 
 }

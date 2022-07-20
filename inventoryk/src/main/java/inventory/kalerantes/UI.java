@@ -24,18 +24,19 @@ public class UI {
 	}
 
 	public void run() {
-		try (Scanner scanner = new Scanner(System.in)) {
-			while (true) {
-				dotIt(scanner, System.out, System.err);
-			}
-		}
+		Scanner scanner = new Scanner(System.in);
+		printMenuOptions(System.out);
+		prompt(System.out);
+		while (scanner.hasNext())
+			dotIt(scanner, System.out, System.err);
 	}
 
 	private void dotIt(Scanner scanner, PrintStream out, PrintStream err) {
-		printMenuOptions(out);
 		String choice = parseInputFromCommandLine(scanner, out, err);
 		MenuItem menuItemSelected = menu.findByCode(choice);
 		menuItemSelected.execute(list, scanner, out);
+		printMenuOptions(out);
+		prompt(out);
 	}
 
 	private void printMenuOptions(PrintStream out) {
@@ -43,15 +44,14 @@ public class UI {
 	}
 
 	private String parseInputFromCommandLine(Scanner sc, PrintStream out, PrintStream err) {
-		prompt(out);
 		while(sc.hasNext()) {
 			try {
 				return validateChoice(sc, out);
 			} catch (Exception e) {
 				err.println(e.getMessage());
-			}
-			finally {
+				err.flush();
 				prompt(out);
+				out.flush();
 			}
 		}
 		return null;
@@ -59,7 +59,6 @@ public class UI {
 
 	private String validateChoice(Scanner sc, PrintStream out) {
 		String choice = sc.next();
-		out.println("Choice:" + choice);
 		cliMenuChoiceValidator.validate(choice);
 		return choice;
 	}
