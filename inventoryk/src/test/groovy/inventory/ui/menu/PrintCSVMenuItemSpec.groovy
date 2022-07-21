@@ -2,7 +2,6 @@ package inventory.ui.menu
 
 import formats.CsvFormat
 import inventory.kalerantes.ItemList
-import inventory.ui.menu.PrintCSVMenuItem
 import spock.lang.Specification
 
 class PrintCSVMenuItemSpec extends Specification {
@@ -20,7 +19,8 @@ class PrintCSVMenuItemSpec extends Specification {
 	}
 
 	def "message header"() {
-		mi.messageHeader() == "INVETORY CSV REPORT\n********************"
+		expect:
+		mi.messageHeader() == "INVETORY CSV REPORT${System.lineSeparator()}********************"
 	}
 
 	def "when execute is called then a csv format is printed"() {
@@ -30,13 +30,16 @@ class PrintCSVMenuItemSpec extends Specification {
 		Scanner scanner = new Scanner(System.in)
 		ItemList list = new ItemList()
 
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+
 		when:
-		mi.execute(list, scanner, System.out) //TODO capture and assert the output
+		mi.execute(list, scanner, out)
 
 		then:
 		1 * mock.setItems(list)
-		1 * mock.printCsv()
-
+		1 * mock.printCsv() >> "csv"
+		out.out.toString() == "INVETORY CSV REPORT${System.lineSeparator()}********************${System.lineSeparator()}csv${System.lineSeparator()}"
 	}
 
 }

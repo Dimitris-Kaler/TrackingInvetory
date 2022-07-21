@@ -23,7 +23,7 @@ public class PrintHtmlMenuItem extends MenuItem {
 	}
 
 	private String headerMessage() {
-		return String.format("INVETORY HTML REPORT%s********************",System.lineSeparator());
+		return String.format("INVETORY HTML REPORT%s********************", System.lineSeparator());
 	}
 
 }

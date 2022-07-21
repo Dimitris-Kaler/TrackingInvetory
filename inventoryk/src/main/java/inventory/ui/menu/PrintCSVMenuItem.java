@@ -18,12 +18,12 @@ public class PrintCSVMenuItem extends MenuItem {
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		csvFormatter.setItems(list);
-		System.out.println(messageHeader());
-		System.out.println(csvFormatter.printCsv() + "\n");
+		out.println(messageHeader());
+		out.println(csvFormatter.printCsv());
 	}
 
 	private String messageHeader() {
-		return "INVETORY CSV REPORT\n********************";
+		return String.format("INVETORY CSV REPORT%s********************", System.lineSeparator());
 	}
 
 }
