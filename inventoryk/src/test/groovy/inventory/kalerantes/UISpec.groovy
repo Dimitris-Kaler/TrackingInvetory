@@ -119,13 +119,12 @@ class UISpec extends Specification {
 
 	def "parse invalid input"() {
 		given:
-		def userKeys = "a" + System.lineSeparator()
+		String invalidChoice = "a" + System.lineSeparator()
+		String validChoice = "1" + System.lineSeparator()
+		def userKeys =  invalidChoice + validChoice
+
 		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
 		Scanner scanner = new Scanner(input)
-
-		CLIMenuChoiceValidator stub = Stub()
-		stub.validate(_) >> {throw new RuntimeException("fail")}
-		ui.cliMenuChoiceValidator = stub
 
 		OutputStream captureOutput = new ByteArrayOutputStream()
 		OutputStream captureOutputError = new ByteArrayOutputStream()
@@ -135,11 +134,17 @@ class UISpec extends Specification {
 		when:
 		String choice = ui.parseInputFromCommandLine(scanner, out, err)
 
-		then:
-		choice == null
+		then: "the final choice is 1"
+		choice == "1"
+
+		and: "no exception is thrown"
 		notThrown(Exception)
+
+		and: "the error message of the invalid choice is captured"
+		captureOutputError.toString() == "Expected value between 1 and 6 but got a instead.${System.lineSeparator()}"
+
+		and: "the user was asked to re-enter a valid choice"
 		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
-		captureOutputError.toString() == "fail${System.lineSeparator()}"
 	}
 
 	def doIt() {

@@ -26,8 +26,7 @@ public class UI {
 
 	public void run(InputStream in, PrintStream out, PrintStream err) {
 		Scanner scanner = new Scanner(in);
-		printMenuOptions(out);
-		prompt(out);
+		displayMenuWithPrompt(out);
 		while (scanner.hasNext())
 			dotIt(scanner, out, err);
 
@@ -37,16 +36,16 @@ public class UI {
 		String choice = parseInputFromCommandLine(scanner, out, err);
 		MenuItem menuItemSelected = menu.findByCode(choice);
 		menuItemSelected.execute(list, scanner, out);
+		displayMenuWithPrompt(out);
+	}
+
+
+	private void displayMenuWithPrompt(PrintStream out) {
 		printMenuOptions(out);
 		prompt(out);
 	}
 
-	private void printMenuOptions(PrintStream out) {
-		out.println(menu.options());
-	}
-
 	private String parseInputFromCommandLine(Scanner sc, PrintStream out, PrintStream err) {
-		while(sc.hasNext()) {
 			try {
 				return validateChoice(sc, out);
 			} catch (Exception e) {
@@ -54,15 +53,18 @@ public class UI {
 				err.flush();
 				prompt(out);
 				out.flush();
-			}
+				return parseInputFromCommandLine(sc, out, err);
 		}
-		return null;
 	}
 
 	private String validateChoice(Scanner sc, PrintStream out) {
 		String choice = sc.next();
 		cliMenuChoiceValidator.validate(choice);
 		return choice;
+	}
+
+	private void printMenuOptions(PrintStream out) {
+		out.println(menu.options());
 	}
 
 	private void prompt(PrintStream out) {
