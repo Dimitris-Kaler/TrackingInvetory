@@ -8,6 +8,7 @@ import inventory.kalerantes.ItemList;
 
 public class ExitProgramMenuItem extends MenuItem {
 
+	private static final String MESSAGE = "BYE BYE!!!";
 	private Exit exit;
 
 	public ExitProgramMenuItem() {
@@ -17,12 +18,8 @@ public class ExitProgramMenuItem extends MenuItem {
 
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
-		System.out.println(message());
+		out.println(MESSAGE);
 		exit.doIt();
-	}
-
-	private String message() {
-		return "BYE BYE!!!";
 	}
 
 }

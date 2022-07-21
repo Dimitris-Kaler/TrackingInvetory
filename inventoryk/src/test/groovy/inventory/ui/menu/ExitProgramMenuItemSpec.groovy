@@ -2,7 +2,6 @@ package inventory.ui.menu
 
 import inventory.kalerantes.Exit
 import inventory.kalerantes.ItemList
-import inventory.ui.menu.ExitProgramMenuItem
 import spock.lang.Specification
 
 class ExitProgramMenuItemSpec extends Specification {
@@ -21,7 +20,7 @@ class ExitProgramMenuItemSpec extends Specification {
 
 	def 'message says BYE BYE!!!'() {
 		expect:
-		mi.message() == "BYE BYE!!!"
+		ExitProgramMenuItem.MESSAGE == "BYE BYE!!!"
 	}
 
 	def "when execute method is called then a call to the method that exits is made"() {
@@ -31,12 +30,15 @@ class ExitProgramMenuItemSpec extends Specification {
 		Scanner scanner = new Scanner(System.in)
 		ItemList list = new ItemList()
 
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+
 		when:
-		mi.execute(list, scanner, System.out) //TODO capture and assert the output
+		mi.execute(list, scanner, out)
 
 		then:
 		1 * mock.doIt()
+		out.out.toString() == "BYE BYE!!!${System.lineSeparator()}"
 	}
-
 
 }
