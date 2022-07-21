@@ -1,8 +1,9 @@
-package inventory.menu
+package inventory.ui.menu
 
 import inventory.kalerantes.Item
 import inventory.kalerantes.ItemCLIParser
 import inventory.kalerantes.ItemList
+import inventory.ui.menu.AddItemMenuItem
 import spock.lang.Specification
 
 class MenuItemSpec extends Specification {

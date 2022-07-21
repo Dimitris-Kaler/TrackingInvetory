@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import inventory.menu.Menu;
-import inventory.menu.MenuItem;
+import inventory.ui.menu.Menu;
+import inventory.ui.menu.MenuItem;
 
 public class UI {
 

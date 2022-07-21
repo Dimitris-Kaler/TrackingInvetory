@@ -1,4 +1,4 @@
-package inventory.menu;
+package inventory.ui.menu;
 
 import java.util.ArrayList;
 import java.util.List;

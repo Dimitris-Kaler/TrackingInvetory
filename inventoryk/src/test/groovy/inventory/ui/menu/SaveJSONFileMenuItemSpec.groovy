@@ -1,7 +1,8 @@
-package inventory.menu
+package inventory.ui.menu
 
 import formats.JsonFormat
 import inventory.kalerantes.ItemList
+import inventory.ui.menu.SaveJSONFileMenuItem
 import spock.lang.Specification
 
 class SaveJSONFileMenuItemSpec extends Specification {

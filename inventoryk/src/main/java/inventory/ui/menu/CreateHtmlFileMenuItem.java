@@ -1,4 +1,4 @@
-package inventory.menu;
+package inventory.ui.menu;
 
 import java.io.PrintStream;
 import java.util.Scanner;

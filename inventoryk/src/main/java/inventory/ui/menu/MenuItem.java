@@ -1,4 +1,4 @@
-package inventory.menu;
+package inventory.ui.menu;
 
 public abstract class MenuItem implements MenuItemCommand  {
 
@@ -22,6 +22,5 @@ public abstract class MenuItem implements MenuItemCommand  {
 	public String toString() {
 		return String.format("%s.%s", code, description);
 	}
-
 
 }
