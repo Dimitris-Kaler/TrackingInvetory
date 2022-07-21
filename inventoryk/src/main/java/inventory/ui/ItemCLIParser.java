@@ -13,13 +13,13 @@ public class ItemCLIParser {
 		out.print("Item name: ");
 		String name = scanner.next();
 		out.print("Item serial number: ");
-		String SerialNumber = scanner.next();
+		String sn = scanner.next();
 		out.print("Item value: ");
 		String valueString = scanner.next();
 		BigDecimal value;
 		try {
 			value = new BigDecimal(valueString);
-			return new Item(name, SerialNumber, value);
+			return new Item(name, sn, value);
 		} catch (NumberFormatException e) {
 			throw new ValueNotNumeric(valueString);
 		}
