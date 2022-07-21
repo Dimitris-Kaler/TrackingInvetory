@@ -1,5 +1,6 @@
 package inventory.kalerantes;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -23,12 +24,13 @@ public class UI {
 		this.menu = menu;
 	}
 
-	public void run() {
-		Scanner scanner = new Scanner(System.in);
-		printMenuOptions(System.out);
-		prompt(System.out);
+	public void run(InputStream in, PrintStream out, PrintStream err) {
+		Scanner scanner = new Scanner(in);
+		printMenuOptions(out);
+		prompt(out);
 		while (scanner.hasNext())
-			dotIt(scanner, System.out, System.err);
+			dotIt(scanner, out, err);
+
 	}
 
 	private void dotIt(Scanner scanner, PrintStream out, PrintStream err) {

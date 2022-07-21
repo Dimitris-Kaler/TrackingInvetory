@@ -7,7 +7,7 @@ public class App {
 
 
 	public static void main(String[] args) {
-		new UI().run();
+		new UI().run(System.in, System.out, System.err);
 	}
 
 }
