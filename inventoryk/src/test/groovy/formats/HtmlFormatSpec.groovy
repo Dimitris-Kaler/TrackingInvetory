@@ -5,30 +5,35 @@ import inventory.kalerantes.ItemList
 import  spock.lang.Specification
 
 
-
 class HtmlFormatSpec extends Specification {
 
 
 	def "initialise HtmlFormat"(){
 		when:
-		ItemList items=new ItemList()
-		HtmlFormat htmlFormat=new HtmlFormat(items);
+		ItemList items = new ItemList()
+		HtmlFormat htmlFormat = new HtmlFormat(items);
+
 		then:
 		htmlFormat.items==items;
 	}
 
-
-
 	def "print header of html"(){
-		when:
-		HtmlFormat htmlFormat=new HtmlFormat();
-		StringBuilder strBuilder=new StringBuilder()
-		htmlFormat.htmlHeader(strBuilder);
+		given:
+		HtmlFormat htmlFormat = new HtmlFormat();
 
-		then:
-		strBuilder.length()==255;
+		expect:
+		htmlFormat.htmlHeader() == header();
 	}
 
+
+	private String header() {
+		"<!DOCTYPE html>${System.lineSeparator()}<html lang=\"en\">${System.lineSeparator()} <head>${System.lineSeparator()}\t<meta charset=\"UTF-8\">${System.lineSeparator()}" +
+		"\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">${System.lineSeparator()}" +
+		"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">${System.lineSeparator()}" +
+		"\t<title>HTML REPORT</title>${System.lineSeparator()}" +
+		"</head>${System.lineSeparator()}" +
+		"<body>${System.lineSeparator()}"
+	}
 
 	def "print message if the list of items is empty"(){
 

@@ -29,21 +29,20 @@ public class HtmlFormat {
 
 	public String printHtml() {
 		StringBuilder strBuilder = new StringBuilder();
-		htmlHeader(strBuilder);
+		strBuilder.append(htmlHeader());
 		printItems(getItems(), strBuilder);
 		htmlFooter(strBuilder);
 		return strBuilder.toString();
 
 	}
 
-	public void htmlHeader(StringBuilder sbuilder) {
-		final String HTMLSTRING = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">\r\n" + "<head>\r\n"
-				+ "    <meta charset=\"UTF-8\">\r\n"
-				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
-				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-				+ "    <title>HTML REPORT</title>\r\n" + "</head>\r\n" + "<body>\r\n";
-
-		sbuilder.append(HTMLSTRING);
+	public String htmlHeader() {
+		String line1 = String.format("<!DOCTYPE html>%s<html lang=\"en\">%s <head>%s", System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
+		String line2 = String.format("\t<meta charset=\"UTF-8\">%s", System.lineSeparator());
+		String line3 = String.format("\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">%s", System.lineSeparator());
+		String line4 = String.format("\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">%s", System.lineSeparator());
+		String line5 = String.format("\t<title>HTML REPORT</title>%s</head>%s<body>%s", System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
+		return String.format("%s%s%s%s%s", line1, line2, line3, line4, line5);
 	}
 
 	public void printItems(ItemList list, StringBuilder sbuilder) {
