@@ -7,7 +7,7 @@ public class ValueNotNumeric extends RuntimeException {
 	}
 
 	private static String message(String valueString) {
-		return String.format("Expected numeric value for item's value but got 'abc' instead");
+		return String.format("Expected numeric value for item's value but got '%s' instead", valueString);
 	}
 
 }
