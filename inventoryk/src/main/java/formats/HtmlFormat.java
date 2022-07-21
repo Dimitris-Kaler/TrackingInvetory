@@ -9,6 +9,8 @@ import inventory.kalerantes.ItemList;
 
 public class HtmlFormat {
 
+	private static final String LINE_SEP = System.lineSeparator();
+
 	private ItemList items;
 
 	public HtmlFormat() {
@@ -30,41 +32,70 @@ public class HtmlFormat {
 	public String printHtml() {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append(htmlHeader());
-		printItems(getItems(), strBuilder);
+		strBuilder.append(printItems());
 		htmlFooter(strBuilder);
 		return strBuilder.toString();
 
 	}
 
 	public String htmlHeader() {
-		String line1 = String.format("<!DOCTYPE html>%s<html lang=\"en\">%s <head>%s", System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
-		String line2 = String.format("\t<meta charset=\"UTF-8\">%s", System.lineSeparator());
-		String line3 = String.format("\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">%s", System.lineSeparator());
-		String line4 = String.format("\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">%s", System.lineSeparator());
-		String line5 = String.format("\t<title>HTML REPORT</title>%s</head>%s<body>%s", System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
+		String line1 = String.format("<!DOCTYPE html>%s<html lang=\"en\">%s <head>%s", LINE_SEP, LINE_SEP, LINE_SEP);
+		String line2 = String.format("\t<meta charset=\"UTF-8\">%s", LINE_SEP);
+		String line3 = String.format("\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">%s", LINE_SEP);
+		String line4 = String.format("\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">%s", LINE_SEP);
+		String line5 = String.format("\t<title>HTML REPORT</title>%s</head>%s<body>%s", LINE_SEP, LINE_SEP, LINE_SEP);
 		return String.format("%s%s%s%s%s", line1, line2, line3, line4, line5);
 	}
 
-	public void printItems(ItemList list, StringBuilder sbuilder) {
-		if (list.getLi().size() == 0) {
-			sbuilder.append(" <p>No items on the Invetory.</p>\n");
-		} else {
-			sbuilder.append(
-					" <table style='margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'>\n"
-							+ "  <thead style='border-bottom:1px solid blue'>\n" + "   <tr>\n" + "    <th>name</th>\n"
-							+ "    <th>serialNumber</th>\n" + "    <th>value</th>\n" + "   </tr>\n");
-			appendListItems(sbuilder);
+	public String printItems() {
+		if (!items.getLi().isEmpty())
+			return table(String.format("\t%s%s\t%s", tableHeader(), LINE_SEP, tableRows()));
 
-		}
+		return " <p>No items on the Invetory.</p>\n";
 	}
 
-	private void appendListItems(StringBuilder sbuilder) {
-		for (Item item : getItems().getLi()) {
-			String str = "   <tr>\n" + "    <td>" + item.getName() + "</td>\n" + "    <td>" + item.getSerialNumber()
-					+ "</td>\n" + "    <td>" + item.getValue() + "</td>\n" + "   </tr>\n";
-			sbuilder.append(str);
-		}
-		sbuilder.append("  <tbody>\n </table>\n");
+	private String table(String content) {
+		return String.format("<table style=%s>%s%s%s</table>", tableStyle(), LINE_SEP, content, LINE_SEP);
+	}
+
+	private String tableHeader() {
+		return String.format("<thead style=%s>%s</thead>", headerStyle(), row(cellHeaders()));
+	}
+
+	private String tableRows() {
+		String str = "<tbody>";
+		for (Item item : getItems().getLi())
+			str += row(cells(item));
+
+		return str +"</tbody>";
+	}
+
+	private String tableStyle() {
+		return "'margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'";
+	}
+
+	private String headerStyle() {
+		return "'border-bottom:1px solid blue'";
+	}
+
+	private String row(String content) {
+		return String.format("<tr>%s</tr>", content, LINE_SEP);
+	}
+
+	private String cellHeaders() {
+		 return String.format("%s%s%s", th("Name"), th("Serial Number"), th("Value"));
+	}
+
+	private String th(String content) {
+		return String.format("<th>%s</th>", content);
+	}
+
+	private String cells(Item item) {
+		return String.format("%s%s%s", cell(item.getName()), cell(item.getSerialNumber()), cell(item.getValue().toString()));
+	}
+
+	private String cell(String content) {
+		return String.format("<td>%s</td>", content);
 	}
 
 	public void htmlFooter(StringBuilder sbuilder) {
