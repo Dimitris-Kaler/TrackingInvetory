@@ -47,7 +47,7 @@ public class UI {
 
 	private String parseInputFromCommandLine(Scanner sc, PrintStream out, PrintStream err) {
 		try {
-			return validateChoice(sc, out);
+			return validateChoice(sc);
 		} catch (Exception e) {
 			err.println(e.getMessage());
 			err.flush();
@@ -57,7 +57,7 @@ public class UI {
 		}
 	}
 
-	private String validateChoice(Scanner sc, PrintStream out) {
+	private String validateChoice(Scanner sc) {
 		String choice = sc.next();
 		cliMenuChoiceValidator.validate(choice);
 		return choice;
