@@ -5,7 +5,7 @@ public abstract class MenuItem implements MenuItemCommand  {
 	private String code;
 	private String description;
 
-	public MenuItem(String code, String description) {
+	protected MenuItem(String code, String description) {
 		this.code = code;
 		this.description = description;
 	}
