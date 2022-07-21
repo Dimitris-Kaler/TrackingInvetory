@@ -4,8 +4,8 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import exceptions.ValueNotNumeric;
 import inventory.kalerantes.Item;
+import inventory.ui.exceptions.ValueNotNumeric;
 
 public class ItemCLIParser {
 

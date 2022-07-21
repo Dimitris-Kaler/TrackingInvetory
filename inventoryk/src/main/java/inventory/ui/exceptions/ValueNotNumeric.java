@@ -1,4 +1,4 @@
-package exceptions;
+package inventory.ui.exceptions;
 
 public class ValueNotNumeric extends RuntimeException {
 

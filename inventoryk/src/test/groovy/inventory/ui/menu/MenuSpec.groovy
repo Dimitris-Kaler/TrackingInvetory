@@ -1,8 +1,8 @@
 package inventory.ui.menu
 
-import exceptions.InvalidMenuItemCode
 import inventory.ui.menu.Menu
 import inventory.ui.menu.MenuItem
+import inventory.ui.menu.exceptions.InvalidMenuItemCode
 import spock.lang.Specification
 import spock.lang.Unroll
 

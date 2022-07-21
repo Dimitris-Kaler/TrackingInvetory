@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import exceptions.InvalidMenuItemCode;
+import inventory.ui.menu.exceptions.InvalidMenuItemCode;
 
 public class Menu {
 

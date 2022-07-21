@@ -1,6 +1,6 @@
 package inventory.ui.menu
 
-import exceptions.InvalidMenuChoice
+import inventory.ui.exceptions.InvalidMenuChoice
 import inventory.ui.menu.CLIMenuChoiceValidator
 import spock.lang.Specification
 import spock.lang.Unroll
