@@ -1,6 +1,8 @@
-package inventory.kalerantes
+package inventory.ui
 
 import exceptions.ValueNotNumeric
+import inventory.kalerantes.Item
+import inventory.ui.ItemCLIParser
 import spock.lang.Specification
 
 class ItemCLIParserSpec extends Specification {

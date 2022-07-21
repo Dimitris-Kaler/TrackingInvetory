@@ -4,8 +4,8 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import inventory.kalerantes.Item;
-import inventory.kalerantes.ItemCLIParser;
 import inventory.kalerantes.ItemList;
+import inventory.ui.ItemCLIParser;
 
 public class AddItemMenuItem extends MenuItem {
 

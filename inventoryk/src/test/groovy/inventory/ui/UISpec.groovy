@@ -1,5 +1,7 @@
-package inventory.kalerantes
+package inventory.ui
 
+import inventory.ui.UI
+import inventory.ui.menu.CLIMenuChoiceValidator
 import inventory.ui.menu.Menu
 import inventory.ui.menu.MenuItem
 import spock.lang.Specification

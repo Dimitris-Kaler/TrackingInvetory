@@ -1,4 +1,4 @@
-package inventory.kalerantes;
+package inventory.ui.menu;
 
 import exceptions.InvalidMenuChoice;
 
