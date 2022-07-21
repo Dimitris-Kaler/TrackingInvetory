@@ -2,7 +2,6 @@ package inventory.ui.menu
 
 import formats.HtmlFormat
 import inventory.kalerantes.ItemList
-import inventory.ui.menu.PrintHtmlMenuItem
 import spock.lang.Specification
 
 class PrintHtmlMenuItemSpec extends Specification {
@@ -21,7 +20,7 @@ class PrintHtmlMenuItemSpec extends Specification {
 
 	def "header message"() {
 		expect:
-		mi.headerMessage() == "INVETORY HTML REPORT\n********************"
+		mi.headerMessage() == "INVETORY HTML REPORT${System.lineSeparator()}********************"
 	}
 
 	def "when calling execute then htmlFormat printHtml method is called"() {
@@ -31,13 +30,16 @@ class PrintHtmlMenuItemSpec extends Specification {
 		ItemList list = new ItemList()
 		mi.htmlFormat = htmlMock
 
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+
 		when:
-		mi.execute(list, scanner, System.out) //TODO capture and assert the output
+		mi.execute(list, scanner, out)
 
 		then:
 		1 * htmlMock.setItems(list)
-		1 * htmlMock.printHtml()
+		1 * htmlMock.printHtml() >> "htmlOuput"
+		out.out.toString() == "INVETORY HTML REPORT${System.lineSeparator()}********************${System.lineSeparator()}htmlOuput${System.lineSeparator()}"
 	}
-
 
 }

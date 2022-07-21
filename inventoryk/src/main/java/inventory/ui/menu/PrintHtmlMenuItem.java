@@ -18,12 +18,12 @@ public class PrintHtmlMenuItem extends MenuItem {
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		htmlFormat.setItems(list);
-		System.out.println(headerMessage());
-		System.out.println(htmlFormat.printHtml());
+		out.println(headerMessage());
+		out.println(htmlFormat.printHtml());
 	}
 
 	private String headerMessage() {
-		return "INVETORY HTML REPORT\n********************";
+		return String.format("INVETORY HTML REPORT%s********************",System.lineSeparator());
 	}
 
 }
