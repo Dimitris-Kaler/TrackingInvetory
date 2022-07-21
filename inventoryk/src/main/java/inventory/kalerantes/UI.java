@@ -28,17 +28,15 @@ public class UI {
 		Scanner scanner = new Scanner(in);
 		displayMenuWithPrompt(out);
 		while (scanner.hasNext())
-			dotIt(scanner, out, err);
-
+			captureAndProcessMenuChoice(scanner, out, err);
 	}
 
-	private void dotIt(Scanner scanner, PrintStream out, PrintStream err) {
+	private void captureAndProcessMenuChoice(Scanner scanner, PrintStream out, PrintStream err) {
 		String choice = parseInputFromCommandLine(scanner, out, err);
 		MenuItem menuItemSelected = menu.findByCode(choice);
 		menuItemSelected.execute(list, scanner, out);
 		displayMenuWithPrompt(out);
 	}
-
 
 	private void displayMenuWithPrompt(PrintStream out) {
 		printMenuOptions(out);
@@ -70,6 +68,5 @@ public class UI {
 	private void prompt(PrintStream out) {
 		out.println("Enter choice: ");
 	}
-
 
 }

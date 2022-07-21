@@ -16,117 +16,137 @@ class UISpec extends Specification {
 	}
 
 	def prompt() {
-		given:
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
+		given: 'an output stream'
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
-		when:
+		when: "prompting"
 		ui.prompt(out)
 
-		then:
-		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
+		then: 'the appropriate message is displayed'
+		out.out.toString() == "Enter choice: ${System.lineSeparator()}"
 	}
 
 	def printMenuOptions() {
-		given:
-		Menu menu = Stub()
-		String options = "option1${System.lineSeparator()}option2"
-		menu.options() >> options
-		ui = new UI(menu)
+		given: "a menu"
+		ui = new UI(menuStub())
 
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
+		and: 'and an output stream'
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
-		when:
+		when: "printing the menu options"
 		ui.printMenuOptions(out)
 
-		then:
-		captureOutput.toString() == options + System.lineSeparator()
-
+		then: "those option as displayed in the output stream"
+		out.out.toString() == options() + System.lineSeparator()
 	}
 
 	def "parse input with valid choice"() {
-		given:
-		def userKeys = "1" + System.lineSeparator()
-		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
-		Scanner scanner = new Scanner(input)
+		given: "a valid menu choice"
+		String validChoice = "1"
+		Scanner scanner = menuChoices([validChoice])
 
-		CLIMenuChoiceValidator stub = Stub()
-		ui.cliMenuChoiceValidator = stub
+		and: "the validation will succeed"
+		CLIMenuChoiceValidator successValidatorStub = Stub()
+		ui.cliMenuChoiceValidator = successValidatorStub
 
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
-		when:
+		and: "an error stream"
+		PrintStream err = new PrintStream(new ByteArrayOutputStream())
+
+		when: "parsing"
 		String choice = ui.parseInputFromCommandLine(scanner, out, err)
 
-		then:
-		choice == "1"
-		captureOutput.toString() == ""
-		captureOutputError.toString() == ""
+		then: "the valid choice is captured"
+		choice == validChoice
+
+		and: "nothing is displayed in the output stream"
+		out.out.toString() == ""
+
+		and: "nothing is displayed in the error stream"
+		err.out.toString() == ""
 	}
 
-
 	def "parse invalid input"() {
-		given:
-		String invalidChoice = "a" + System.lineSeparator()
-		String validChoice = "1" + System.lineSeparator()
-		def userKeys =  invalidChoice + validChoice
+		given: "an invalid choice"
+		String invalidChoice = "a"
 
-		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
-		Scanner scanner = new Scanner(input)
+		and: "then a valid choice"
+		String validChoice = "1"
+		Scanner scanner = menuChoices([invalidChoice, validChoice])
 
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
-		when:
+		and: "an error stream"
+		PrintStream err = new PrintStream(new ByteArrayOutputStream())
+
+		when: "parsing"
 		String choice = ui.parseInputFromCommandLine(scanner, out, err)
 
-		then: "the final choice is 1"
-		choice == "1"
+		then: "the final choice is the valid choice"
+		choice == validChoice
 
 		and: "no exception is thrown"
 		notThrown(Exception)
 
 		and: "the error message of the invalid choice is captured"
-		captureOutputError.toString() == "Expected value between 1 and 6 but got a instead.${System.lineSeparator()}"
+		err.out.toString() == "Expected value between 1 and 6 but got a instead.${System.lineSeparator()}"
 
 		and: "the user was asked to re-enter a valid choice"
-		captureOutput.toString() == "Enter choice: ${System.lineSeparator()}"
+		out.out.toString() == "Enter choice: ${System.lineSeparator()}"
 	}
 
 	def doIt() {
-		given:
-		def userKeys = "1" + System.lineSeparator()
-		ByteArrayInputStream input = new ByteArrayInputStream(userKeys.getBytes())
-		Scanner scanner = new Scanner(input)
-
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
+		given: "a valid choice"
+		String choice = "1"
+		Scanner scanner = menuChoices([choice])
 
 		Menu menuStub = Mock()
 		ui.menu = menuStub
-
 		MenuItem menuItemMock = Mock()
 
-		when:
-		ui.dotIt(scanner, out, err)
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
-		then:
-		1 * menuStub.options() >> { "options" }
-		1 * menuStub.findByCode("1") >>  menuItemMock
+		and: "an error stream"
+		PrintStream err = new PrintStream(new ByteArrayOutputStream())
+
+		when: 'capturing and processing the menu choice'
+		ui.captureAndProcessMenuChoice(scanner, out, err)
+
+		then: "menu options is called"
+		1 * menuStub.options() >> options()
+
+		and: "find by code returns the appropriate menu item"
+		1 * menuStub.findByCode(choice) >>  menuItemMock
+
+		and: "the menu item is executed"
 		1 * menuItemMock.execute(ui.list, scanner, out)
-		captureOutput.toString() == "options${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+
+		and: 'menu options and prompt are displayed in output stream'
+		out.out.toString() == "${options()}${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
+
+		and: 'no error message displated in the error stream'
+		err.out.toString() == ""
 	}
+
+	private Menu menuStub() {
+		Menu menu = Stub()
+		menu.options() >> options()
+		menu
+	}
+
+	private String options() {
+		"option1${System.lineSeparator()}option2"
+	}
+
+	//this method might me useful in other specs
+	private Scanner menuChoices(def choices) {
+		def userKeys = choices.join(System.lineSeparator()) + System.lineSeparator()
+		new Scanner(new ByteArrayInputStream(userKeys.getBytes()))
+	}
+
 
 }
