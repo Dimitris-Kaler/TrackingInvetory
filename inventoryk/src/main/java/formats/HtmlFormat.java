@@ -3,6 +3,7 @@ package formats;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import inventory.kalerantes.Item;
 import inventory.kalerantes.ItemList;
@@ -10,7 +11,8 @@ import inventory.kalerantes.ItemList;
 public class HtmlFormat {
 
 	private static final String LINE_SEP = System.lineSeparator();
-
+	private static final String TABLE_STYLE = "'margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'";
+	private static final String HEADER_STYLE = "'border-bottom:1px solid blue'";
 	private ItemList items;
 
 	public HtmlFormat() {
@@ -55,31 +57,27 @@ public class HtmlFormat {
 	}
 
 	private String table(String content) {
-		return String.format("<table style=%s>%s%s%s</table>", tableStyle(), LINE_SEP, content, LINE_SEP);
+		return String.format("<table style=%s>%s%s%s</table>", TABLE_STYLE, LINE_SEP, content, LINE_SEP);
 	}
 
 	private String tableHeader() {
-		return String.format("<thead style=%s>%s</thead>", headerStyle(), row(cellHeaders()));
+		return String.format("<thead style=%s>%s</thead>", HEADER_STYLE, row(cellHeaders()));
 	}
 
 	private String tableRows() {
-		String str = "<tbody>";
-		for (Item item : getItems().getLi())
-			str += row(cells(item));
-
-		return str +"</tbody>";
+		return String.format("<tbody>%s</tbody>", lineItems());
 	}
 
-	private String tableStyle() {
-		return "'margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'";
-	}
-
-	private String headerStyle() {
-		return "'border-bottom:1px solid blue'";
+	private String lineItems() {
+		return getItems().
+				getLi().
+				stream().
+				map(item -> row(cells(item)))
+				.collect(Collectors.joining(""));
 	}
 
 	private String row(String content) {
-		return String.format("<tr>%s</tr>", content, LINE_SEP);
+		return String.format("<tr>%s</tr>", content);
 	}
 
 	private String cellHeaders() {
