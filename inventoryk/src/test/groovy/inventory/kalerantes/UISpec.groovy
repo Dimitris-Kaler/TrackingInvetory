@@ -3,11 +3,9 @@
  */
 package inventory.kalerantes
 
-import exceptions.InvalidMenuChoice
 import inventory.menu.Menu
 import inventory.menu.MenuItem
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class UISpec extends Specification {
 
@@ -15,48 +13,6 @@ class UISpec extends Specification {
 
 	def setup() {
 		ui = new UI()
-	}
-
-	//TODO the following two test are Integration tests. They can be simplified when app class is simplified
-	@Unroll
-	def "accept input throws exception if not between 1 and 6"() {
-		given:
-		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
-		Scanner scanner = new Scanner(input)
-
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-
-		when:
-		ui.validateChoice(scanner, out)
-
-		then:
-		def e = thrown(InvalidMenuChoice)
-		e.message == "Expected value between 1 and 6 but got ${choice} instead."
-
-		where:
-		choice << ["a", "asdfasdgfasdg", "112", "0", null]
-	}
-
-	@Unroll
-	def "accept input only between 1 and 6" () {
-		given:
-		def input = new ByteArrayInputStream((choice + System.lineSeparator() ).getBytes());
-		Scanner scanner = new Scanner(input)
-
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		OutputStream captureOutputError = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
-		PrintStream err = new PrintStream(captureOutputError)
-
-		when:
-		ui.validateChoice(scanner, out)
-
-		then:
-		notThrown(InvalidMenuChoice)
-
-		where:
-		choice << ("1".."6")
 	}
 
 	def prompt() {

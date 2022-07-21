@@ -46,14 +46,14 @@ public class UI {
 	}
 
 	private String parseInputFromCommandLine(Scanner sc, PrintStream out, PrintStream err) {
-			try {
-				return validateChoice(sc, out);
-			} catch (Exception e) {
-				err.println(e.getMessage());
-				err.flush();
-				prompt(out);
-				out.flush();
-				return parseInputFromCommandLine(sc, out, err);
+		try {
+			return validateChoice(sc, out);
+		} catch (Exception e) {
+			err.println(e.getMessage());
+			err.flush();
+			prompt(out);
+			out.flush();
+			return parseInputFromCommandLine(sc, out, err);
 		}
 	}
 
