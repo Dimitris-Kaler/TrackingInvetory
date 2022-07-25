@@ -1,8 +1,5 @@
 package formats;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 import inventory.kalerantes.Item;
@@ -97,18 +94,6 @@ public class HtmlFormatter {
 
 	private String cell(String content) {
 		return String.format("<td>%s</td>", content);
-	}
-
-	public void createHtmlFile() {
-		File file = new File("inventory.html");
-		try (FileWriter fWriter = new FileWriter(file)) {
-			fWriter.write(html());
-			System.out.println("HTML File created!");
-
-		} catch (IOException e) {
-			System.out.println(e);
-
-		}
 	}
 
 }

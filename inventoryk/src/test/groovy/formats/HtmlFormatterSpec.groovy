@@ -77,15 +77,4 @@ class HtmlFormatterSpec extends Specification {
 		"\t</body>${System.lineSeparator()}</html>${System.lineSeparator()}"
 	}
 
-	def "create HtmlFile With the invetory List"(){
-		given:
-		HtmlFormatter htmlFormat=new HtmlFormatter(items);
-		when:
-		htmlFormat.createHtmlFile();
-
-		then:
-		File file=new File("inventory.html")
-		FileWriter fWriter=new FileWriter(file)
-		fWriter.write(htmlFormat.html());
-	}
 }
