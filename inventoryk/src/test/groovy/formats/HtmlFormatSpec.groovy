@@ -22,7 +22,7 @@ class HtmlFormatSpec extends Specification {
 		htmlFormat.items == items;
 	}
 
-	def "print header of html"(){
+	def "header of html"(){
 		given:
 		HtmlFormat htmlFormat = new HtmlFormat();
 
@@ -30,7 +30,7 @@ class HtmlFormatSpec extends Specification {
 		htmlFormat.htmlHeader() == header();
 	}
 
-	def "print message if the list of items is empty"(){
+	def "message if the list of items is empty"(){
 		given:
 		HtmlFormat htmlFormat = new HtmlFormat();
 		StringBuilder strBuilder = new StringBuilder()
@@ -39,7 +39,7 @@ class HtmlFormatSpec extends Specification {
 		htmlFormat.printItems() == " <p>No items on the Invetory.</p>\n"
 	}
 
-	def "print items of the list"(){
+	def "items of the list"() {
 		given:
 		Item item = new Item("SEGA", "345ERW2QA", 250)
 		items.getLi().add(item)
@@ -49,14 +49,12 @@ class HtmlFormatSpec extends Specification {
 		htmlFormat.printItems() ==  tableItems();
 	}
 
-	def "Print the footer of the html"(){
-		when:
-		HtmlFormat htmlFormat=new HtmlFormat();
-		StringBuilder strBuilder=new StringBuilder()
-		htmlFormat.htmlFooter(strBuilder)
+	def "html footer"(){
+		given:
+		HtmlFormat htmlFormat = new HtmlFormat();
 
-		then:
-		strBuilder.length()==17
+		expect:
+		htmlFormat.htmlFooter() == footer()
 	}
 
 	private String header() {
@@ -73,6 +71,10 @@ class HtmlFormatSpec extends Specification {
 		"\t<thead style='border-bottom:1px solid blue'><tr><th>Name</th><th>Serial Number</th><th>Value</th></tr></thead>${System.lineSeparator()}" +
 		"\t<tbody><tr><td>SEGA</td><td>345ERW2QA</td><td>250</td></tr></tbody>${System.lineSeparator()}" +
 		"</table>"
+	}
+
+	private String footer() {
+		"\t</body>${System.lineSeparator()}</html>${System.lineSeparator()}"
 	}
 
 	def "create HtmlFile With the invetory List"(){

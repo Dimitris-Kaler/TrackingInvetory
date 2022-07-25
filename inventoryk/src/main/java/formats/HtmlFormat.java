@@ -35,9 +35,8 @@ public class HtmlFormat {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append(htmlHeader());
 		strBuilder.append(printItems());
-		htmlFooter(strBuilder);
+		strBuilder.append(htmlFooter());
 		return strBuilder.toString();
-
 	}
 
 	public String htmlHeader() {
@@ -96,11 +95,8 @@ public class HtmlFormat {
 		return String.format("<td>%s</td>", content);
 	}
 
-	public void htmlFooter(StringBuilder sbuilder) {
-		final String HTMLSTRING = "</body>\r\n" + "</html>\n";
-
-		sbuilder.append(HTMLSTRING);
-
+	public String htmlFooter() {
+		return String.format("\t</body>%s</html>%s", LINE_SEP, LINE_SEP);
 	}
 
 	public void createHtmlFile() {
