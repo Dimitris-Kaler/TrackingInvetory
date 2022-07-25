@@ -1,9 +1,17 @@
 package exceptions;
 
+import java.math.BigDecimal;
+
 public class LessThanOneValueException extends RuntimeException {
+
+	private BigDecimal value;
+
+	public LessThanOneValueException(BigDecimal value) {
+		this.value = value;
+	}
 
 	@Override
 	public String getMessage() {
-		return "Expected value greater than one but got less tha one instead.";
+		return String.format("Expected value greater than one but got %s instead.", value.toString());
 	}
 }

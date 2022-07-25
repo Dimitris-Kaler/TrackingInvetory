@@ -7,7 +7,6 @@ import exceptions.LessThanOneValueException;
 import exceptions.NullNameNotAllowedException;
 import exceptions.NullSerialNumberNotAllowedException;
 import exceptions.NullValueNotAllowedException;
-import exceptions.OneLetterNotAllowedException;
 import exceptions.SerialNumberLengthNotEqualNine;
 
 public class Item {
@@ -20,8 +19,7 @@ public class Item {
 		this.name = name;
 		this.serialNumber = serialNumber;
 		this.value = value;
-//		validateValue(value);
-		validateInput(name, value, serialNumber);
+		validateInput();
 	}
 
 	public String getName() {
@@ -36,61 +34,55 @@ public class Item {
 		return value;
 	}
 
-	private void validateInput(String name, BigDecimal value, String serialNumber) {
-		validateName(name);
-		validateSerialNumber(serialNumber);
-		validateValue(value);
+	private void validateInput() {
+		validateName();
+		validateSerialNumber();
+		validateValue();
 	}
 
-	private void validateName(String name) {
-		checkNotNullName(name);
-		checkNotEmptyName(name);
-		checkLengthNotOnlyOneLetter(name);
+	private void validateName() {
+		checkNotNullName();
+		checkNotEmptyName();
 	}
 
-	private void validateSerialNumber(String serialNumber) {
-		checkNotNullSerialNumber(serialNumber);
-		checkSerialNumberLengthNot9(serialNumber);
+	private void validateSerialNumber() {
+		checkNotNullSerialNumber();
+		checkSerialNumberLengthNot9();
 	}
 
-	private void validateValue(BigDecimal value) {
-		checkNotNullValue(value);
-		valueLessThanOne(value);
+	private void validateValue() {
+		checkNotNullValue();
+		valueLessThanOne();
 	}
 
-	private void checkNotNullName(String name) {
+	private void checkNotNullName() {
 		if (name == null)
 			throw new NullNameNotAllowedException();
 	}
 
-	private void checkNotEmptyName(String name) {
+	private void checkNotEmptyName() {
 		if ("".equals(name))
 			throw new EmptyNameNotAllowedException();
 	}
 
-	private void checkLengthNotOnlyOneLetter(String name) {
-		if (name.length() == 1)
-			throw new OneLetterNotAllowedException();
-	}
-
-	private void checkNotNullSerialNumber(String serialNumber) {
+	private void checkNotNullSerialNumber() {
 		if (serialNumber == null)
 			throw new NullSerialNumberNotAllowedException();
 	}
 
-	private void checkSerialNumberLengthNot9(String serialNumber) {
+	private void checkSerialNumberLengthNot9() {
 		if (serialNumber.length() != 9)
 			throw new SerialNumberLengthNotEqualNine();
 	}
 
-	private void checkNotNullValue(BigDecimal value) {
+	private void checkNotNullValue() {
 		if (value == null)
 			throw new NullValueNotAllowedException();
 	}
 
-	private void valueLessThanOne(BigDecimal value) {
-		if (value.compareTo(BigDecimal.valueOf(1)) == -1)
-			throw new LessThanOneValueException();
+	private void valueLessThanOne() {
+		if (value.compareTo(BigDecimal.valueOf(1)) < 0)
+			throw new LessThanOneValueException(value);
 	}
 
 }
