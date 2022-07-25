@@ -36,7 +36,7 @@ public class UI {
 	private void captureAndProcessMenuChoice(Scanner scanner, PrintStream out, PrintStream err) {
 		String choice = parseInputFromCommandLine(scanner, out, err);
 		MenuItem menuItemSelected = menu.findByCode(choice);
-		menuItemSelected.execute(list, scanner, out);
+		menuItemSelected.execute(list, scanner, out); //TODO if this line throws exception it blows up
 		displayMenuWithPrompt(out);
 	}
 

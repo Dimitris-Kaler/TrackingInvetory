@@ -6,6 +6,7 @@ build
 
 **/*.swp
 
+inventoryk/src/main/resources/inventory.html
 
 # Eclipse generated files
 

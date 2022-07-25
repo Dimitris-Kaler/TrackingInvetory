@@ -1,8 +1,8 @@
 package inventory.ui.menu
 
 import formats.HtmlFormatter
+import inventory.files.TextFile
 import inventory.kalerantes.ItemList
-import inventory.ui.menu.CreateHtmlFileMenuItem
 import spock.lang.Specification
 
 class CreateHtmlFileMenuItemSpec extends Specification {
@@ -20,18 +20,54 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 	}
 
 	def "when execute method is called then an html file is created"() {
-		given:
-		HtmlFormatter mock = Mock()
-		mi.htmlFormatter = mock
-		Scanner scanner = new Scanner(System.in)
+		given: 'a list of items'
 		ItemList list = new ItemList()
 
-		when:
-		mi.execute(list, scanner, System.out) //TODO capture and assert the output
+		and: 'an html formatter that return html succcesfully'
+		HtmlFormatter htmlFormatterMock = Mock()
+		mi.htmlFormatter = htmlFormatterMock
+
+		and: 'a text file that writes successfuly'
+		TextFile textFileMock = Mock()
+		mi.textFile = textFileMock
+
+		and: 'a Scanner'
+		Scanner scanner = new Scanner(System.in)
+
+		and: 'an output stream'
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+
+		when: 'executing'
+		mi.execute(list, scanner, out)
+
+		then: 'the formatter is called appropriately'
+		1 * htmlFormatterMock.setItems(list)
+		1 * htmlFormatterMock.html() >> "html content"
+
+		and: 'the text file is called appropriately'
+		1 * textFileMock.writeText("html content")
+
+		and: 'a success message is shown on the output'
+		out.out.toString() == "HTML file created in src/main/resources/inventory.html${System.lineSeparator()}"
+	}
+
+	def "when an IOException is thrown then it is wrapped and thrown to the client for handling"() {
+		given: 'a list of items'
+		ItemList list = new ItemList()
+
+
+		and: 'a text file that fails'
+		TextFile textFileMock = Stub()
+		textFileMock.writeText(_) >> {throw new IOException("Error")}
+		mi.textFile = textFileMock
+
+		when: 'executing'
+		mi.execute(list, new Scanner(System.in), System.out)
 
 		then:
-		1 * mock.setItems(list)
-		1 * mock.createHtmlFile()
+		def e = thrown(RuntimeException)
+		e.cause instanceof IOException
+		e.message == "java.io.IOException: Error"
 	}
 
 }

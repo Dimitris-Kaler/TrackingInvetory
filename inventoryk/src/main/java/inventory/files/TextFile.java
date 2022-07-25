@@ -13,7 +13,7 @@ public class TextFile {
 		 path = Paths.get(filePath);
 	}
 
-	void writeText(String content) throws IOException {
+	public void writeText(String content) throws IOException {
 		Files.write(path, content.getBytes());
 	}
 
