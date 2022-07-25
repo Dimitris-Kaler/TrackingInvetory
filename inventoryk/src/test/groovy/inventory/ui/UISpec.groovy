@@ -1,6 +1,5 @@
 package inventory.ui
 
-import inventory.ui.UI
 import inventory.ui.menu.CLIMenuChoiceValidator
 import inventory.ui.menu.Menu
 import inventory.ui.menu.MenuItem
@@ -97,13 +96,13 @@ class UISpec extends Specification {
 		out.out.toString() == "Enter choice: ${System.lineSeparator()}"
 	}
 
-	def doIt() {
+	def captureAndProcessMenuChoice() {
 		given: "a valid choice"
 		String choice = "1"
 		Scanner scanner = menuChoices([choice])
 
-		Menu menuStub = Mock()
-		ui.menu = menuStub
+		Menu menuMock = Mock()
+		ui.menu = menuMock
 		MenuItem menuItemMock = Mock()
 
 		and: "an and output stream"
@@ -116,10 +115,10 @@ class UISpec extends Specification {
 		ui.captureAndProcessMenuChoice(scanner, out, err)
 
 		then: "menu options is called"
-		1 * menuStub.options() >> options()
+		1 * menuMock.options() >> options()
 
 		and: "find by code returns the appropriate menu item"
-		1 * menuStub.findByCode(choice) >>  menuItemMock
+		1 * menuMock.findByCode(choice) >>  menuItemMock
 
 		and: "the menu item is executed"
 		1 * menuItemMock.execute(ui.list, scanner, out)
@@ -129,6 +128,40 @@ class UISpec extends Specification {
 
 		and: 'no error message displated in the error stream'
 		err.out.toString() == ""
+	}
+
+	def 'handle exception thrown from Menu Item execution' () {
+		given: "a valid choice"
+		String choice = "1"
+		Scanner scanner = menuChoices([choice])
+
+		and:
+		MenuItem menuItemStub = Stub()
+		menuItemStub.execute(_, _, _) >> { throw new RuntimeException("fail")}
+
+		and:
+		Menu menuStub = Stub()
+		menuStub.findByCode(_) >> menuItemStub
+		menuStub.options() >> options()
+		ui.menu = menuStub
+
+		and: "an and output stream"
+		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+
+		and: "an error stream"
+		PrintStream err = new PrintStream(new ByteArrayOutputStream())
+
+		when: 'capturing and processing the menu choice'
+		ui.captureAndProcessMenuChoice(scanner, out, err)
+
+		then: 'no exception is thrown to the UI'
+		notThrown(Exception)
+
+		and: 'an error message is displayed in the error stream'
+		err.out.toString() == "Unexpected error: class java.lang.RuntimeException: fail${System.lineSeparator()}"
+
+		and: 'the program prints again the menu and asks for new input'
+		out.out.toString() == "${options()}${System.lineSeparator()}Enter choice: ${System.lineSeparator()}"
 	}
 
 	private Menu menuStub() {
