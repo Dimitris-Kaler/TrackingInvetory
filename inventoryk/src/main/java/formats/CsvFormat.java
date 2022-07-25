@@ -26,12 +26,12 @@ public class CsvFormat {
 	public String printCsv() {
 		StringBuilder strBuilder = new StringBuilder();
 
-		if (getItems().getLi().isEmpty()) {
+		if (getItems().getList().isEmpty()) {
 			strBuilder.append("The inventory List is emtpy\n");
 
 		} else {
 
-			for (Item item : getItems().getLi()) {
+			for (Item item : getItems().getList()) {
 				strBuilder.append(item.getName() + "," + item.getSerialNumber() + "," + item.getValue() + "\n");
 			}
 		}

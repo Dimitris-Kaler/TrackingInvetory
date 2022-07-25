@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class LessThanOneValueException extends RuntimeException {
 
-	private BigDecimal value;
+	private final BigDecimal value;
 
 	public LessThanOneValueException(BigDecimal value) {
 		this.value = value;

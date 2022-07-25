@@ -43,8 +43,8 @@ class MenuItemSpec extends Specification {
 		1 * mock.parseItem(scanner, out) >>  item
 
 		and: "the parsed item lives inside the item list"
-		list.li.size() == 1
-		list.li.first() == item
+		list.list.size() == 1
+		list.list.first() == item
 
 		and: "a successful message is returned to the output"
 		1 * out.println("The item has succesfully submitted to the ItemList")

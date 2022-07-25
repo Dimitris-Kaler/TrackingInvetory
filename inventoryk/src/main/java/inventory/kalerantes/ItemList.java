@@ -5,18 +5,18 @@ import java.util.List;
 
 public class ItemList {
 
-	private List<Item> li;
+	private List<Item> list;
 
 	public ItemList() {
-		li = new ArrayList<Item>();
+		list = new ArrayList<>();
 	}
 
-	public List<Item> getLi() {
-		return li;
+	public List<Item> getList() {
+		return list;
 	}
 
 	public void addItem(Item item) {
-		getLi().add(item);
+		getList().add(item);
 	}
 
 }

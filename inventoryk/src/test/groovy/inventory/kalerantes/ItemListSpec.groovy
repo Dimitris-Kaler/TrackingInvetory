@@ -9,7 +9,7 @@ class ItemListSpec extends Specification {
 		ItemList li=new ItemList();
 
 		then:
-		li.getLi()==new ArrayList();
+		li.getList()==new ArrayList();
 	}
 
 	def "add item"() {
@@ -20,7 +20,7 @@ class ItemListSpec extends Specification {
 		list.addItem(new Item("123", "123456789", 23))
 
 		then:
-		list.li.size() == 1
+		list.list.size() == 1
 	}
 
 }

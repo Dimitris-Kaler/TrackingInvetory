@@ -36,7 +36,7 @@ class JsonFormatSpec extends Specification {
 		Item item=new Item("SKODA","XSWER234R",2000)
 		
 		ItemList items=new ItemList()
-		items.getLi().add(item)
+		items.getList().add(item)
 		JsonFormat jFormat=new JsonFormat(items)
 		
 		when:
@@ -60,8 +60,8 @@ class JsonFormatSpec extends Specification {
 		Item item1=new Item("BMW","WEDFG12WQ",10000)
 		
 		ItemList items=new ItemList()
-		items.getLi().add(item)
-		items.getLi().add(item1)
+		items.getList().add(item)
+		items.getList().add(item1)
 		JsonFormat jFormat=new JsonFormat(items)
 		
 		when:
@@ -90,7 +90,7 @@ class JsonFormatSpec extends Specification {
 		Item item=new Item("SKODA","XSWER234R",2000)
 		
 		ItemList items=new ItemList()
-		items.getLi().add(item)
+		items.getList().add(item)
 		JsonFormat jFormat=new JsonFormat(items)
 		File file=new File("text.json")
 		FileWriter fWriter=new FileWriter(file)

@@ -46,7 +46,7 @@ public class HtmlFormatter {
 	}
 
 	private String formattedItems() {
-		if (!items.getLi().isEmpty())
+		if (!items.getList().isEmpty())
 			return table(String.format("\t%s%s\t%s", tableHeader(), LINE_SEP, tableRows()));
 
 		return String.format("\t<p>No items on the Invetory.</p>%s", LINE_SEP);
@@ -70,7 +70,7 @@ public class HtmlFormatter {
 
 	private String lineItems() {
 		return getItems().
-				getLi().
+				getList().
 				stream().
 				map(item -> row(cells(item)))
 				.collect(Collectors.joining(""));

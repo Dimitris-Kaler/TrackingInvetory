@@ -21,7 +21,7 @@ class CsvFormatSpec extends Specification {
 		given:
 		Item item=new Item("SKODA","XSWER234R",2000);
 		ItemList items=new ItemList()
-		items.getLi().add(item)
+		items.getList().add(item)
 		CsvFormat csvFormat=new CsvFormat(items);
 		when:
 		String result=csvFormat.printCsv()
@@ -40,7 +40,7 @@ class CsvFormatSpec extends Specification {
 		
 		when:
 		String result=csvFormat.printCsv()
-		csvFormat.items.getLi().isEmpty();
+		csvFormat.items.getList().isEmpty();
 		
 		then: 
 		result=="The inventory List is emtpy\n"

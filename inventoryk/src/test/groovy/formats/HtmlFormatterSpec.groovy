@@ -42,7 +42,7 @@ class HtmlFormatterSpec extends Specification {
 		given:
 		Item item = new Item("SEGA", "345ERW2QA", 250)
 		//TODO law of Demeter violation
-		items.getLi().add(item)
+		items.getList().add(item)
 		HtmlFormatter formatter = new HtmlFormatter(items);
 
 		expect:
