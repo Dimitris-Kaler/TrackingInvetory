@@ -1,4 +1,4 @@
-package inventory.kalerantes;
+package inventory.items;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,8 +3,8 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import inventory.kalerantes.Item;
-import inventory.kalerantes.ItemList;
+import inventory.items.Item;
+import inventory.items.ItemList;
 import inventory.ui.ItemCLIParser;
 
 public class AddItemMenuItem extends MenuItem {

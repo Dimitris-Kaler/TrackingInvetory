@@ -3,7 +3,7 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import inventory.kalerantes.ItemList;
+import inventory.items.ItemList;
 
 public interface MenuItemCommand {
 

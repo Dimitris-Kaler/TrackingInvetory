@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import formats.CsvFormat;
-import inventory.kalerantes.ItemList;
+import inventory.items.ItemList;
 
 public class PrintCSVMenuItem extends MenuItem {
 

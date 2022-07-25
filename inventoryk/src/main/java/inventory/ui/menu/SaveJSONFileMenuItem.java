@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import formats.JsonFormat;
-import inventory.kalerantes.ItemList;
+import inventory.items.ItemList;
 
 public class SaveJSONFileMenuItem extends MenuItem {
 

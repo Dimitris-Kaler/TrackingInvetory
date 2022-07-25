@@ -1,8 +1,8 @@
 package formats
 
-import exceptions.NullItemListException
-import inventory.kalerantes.Item
-import inventory.kalerantes.ItemList
+import inventory.items.Item
+import inventory.items.ItemList
+import inventory.items.exceptions.NullItemListException
 import spock.lang.Specification
 
 

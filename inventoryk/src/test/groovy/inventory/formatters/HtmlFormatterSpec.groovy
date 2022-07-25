@@ -1,7 +1,8 @@
-package formats
+package inventory.formatters
 
-import inventory.kalerantes.Item
-import inventory.kalerantes.ItemList
+import inventory.formatters.HtmlFormatter
+import inventory.items.Item
+import inventory.items.ItemList
 import  spock.lang.Specification
 
 

@@ -1,7 +1,8 @@
 package inventory.ui.menu
 
-import formats.HtmlFormatter
-import inventory.kalerantes.ItemList
+import inventory.formatters.HtmlFormatter
+import inventory.items.ItemList
+import inventory.utils.Utils
 import spock.lang.Specification
 
 class PrintHtmlMenuItemSpec extends Specification {
@@ -31,7 +32,7 @@ class PrintHtmlMenuItemSpec extends Specification {
 		mi.htmlFormat = htmlMock
 
 		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+		PrintStream out = Utils.printStream()
 
 		when:
 		mi.execute(list, scanner, out)

@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import formats.HtmlFormatter;
 import inventory.files.TextFile;
-import inventory.kalerantes.ItemList;
+import inventory.formatters.HtmlFormatter;
+import inventory.items.ItemList;
 
 public class CreateHtmlFileMenuItem extends MenuItem {
 

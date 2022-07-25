@@ -1,13 +1,13 @@
-package inventory.kalerantes;
+package inventory.items;
 
 import java.math.BigDecimal;
 
-import exceptions.EmptyNameNotAllowedException;
-import exceptions.LessThanOneValueException;
-import exceptions.NullNameNotAllowedException;
-import exceptions.NullSerialNumberNotAllowedException;
-import exceptions.NullValueNotAllowedException;
-import exceptions.SerialNumberLengthNotEqualNine;
+import inventory.items.exceptions.EmptyNameNotAllowedException;
+import inventory.items.exceptions.LessThanOneValueException;
+import inventory.items.exceptions.NullNameNotAllowedException;
+import inventory.items.exceptions.NullSerialNumberNotAllowedException;
+import inventory.items.exceptions.NullValueNotAllowedException;
+import inventory.items.exceptions.SerialNumberLengthNotEqualNine;
 
 public class Item {
 

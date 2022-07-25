@@ -1,9 +1,9 @@
-package formats;
+package inventory.formatters;
 
 import java.util.stream.Collectors;
 
-import inventory.kalerantes.Item;
-import inventory.kalerantes.ItemList;
+import inventory.items.Item;
+import inventory.items.ItemList;
 
 public class HtmlFormatter {
 

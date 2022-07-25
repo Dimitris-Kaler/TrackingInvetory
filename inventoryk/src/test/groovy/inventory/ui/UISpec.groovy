@@ -3,20 +3,22 @@ package inventory.ui
 import inventory.ui.menu.CLIMenuChoiceValidator
 import inventory.ui.menu.Menu
 import inventory.ui.menu.MenuItem
+import inventory.utils.Utils
 import spock.lang.Specification
 
 class UISpec extends Specification {
 
 	UI ui
+	PrintStream out
+	PrintStream err
 
 	def setup() {
 		ui = new UI()
+		out = Utils.printStream()
+		err = Utils.printStream()
 	}
 
 	def prompt() {
-		given: 'an output stream'
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
-
 		when: "prompting"
 		ui.prompt(out)
 
@@ -27,9 +29,6 @@ class UISpec extends Specification {
 	def printMenuOptions() {
 		given: "a menu"
 		ui = new UI(menuStub())
-
-		and: 'and an output stream'
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
 
 		when: "printing the menu options"
 		ui.printMenuOptions(out)
@@ -46,12 +45,6 @@ class UISpec extends Specification {
 		and: "the validation will succeed"
 		CLIMenuChoiceValidator successValidatorStub = Stub()
 		ui.cliMenuChoiceValidator = successValidatorStub
-
-		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
-
-		and: "an error stream"
-		PrintStream err = new PrintStream(new ByteArrayOutputStream())
 
 		when: "parsing"
 		String choice = ui.parseInputFromCommandLine(scanner, out, err)
@@ -73,12 +66,6 @@ class UISpec extends Specification {
 		and: "then a valid choice"
 		String validChoice = "1"
 		Scanner scanner = menuChoices([invalidChoice, validChoice])
-
-		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
-
-		and: "an error stream"
-		PrintStream err = new PrintStream(new ByteArrayOutputStream())
 
 		when: "parsing"
 		String choice = ui.parseInputFromCommandLine(scanner, out, err)
@@ -104,12 +91,6 @@ class UISpec extends Specification {
 		Menu menuMock = Mock()
 		ui.menu = menuMock
 		MenuItem menuItemMock = Mock()
-
-		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
-
-		and: "an error stream"
-		PrintStream err = new PrintStream(new ByteArrayOutputStream())
 
 		when: 'capturing and processing the menu choice'
 		ui.captureAndProcessMenuChoice(scanner, out, err)
@@ -144,12 +125,6 @@ class UISpec extends Specification {
 		menuStub.findByCode(_) >> menuItemStub
 		menuStub.options() >> options()
 		ui.menu = menuStub
-
-		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
-
-		and: "an error stream"
-		PrintStream err = new PrintStream(new ByteArrayOutputStream())
 
 		when: 'capturing and processing the menu choice'
 		ui.captureAndProcessMenuChoice(scanner, out, err)

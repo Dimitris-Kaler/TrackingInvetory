@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import inventory.kalerantes.Item;
+import inventory.items.Item;
 import inventory.ui.exceptions.ValueNotNumeric;
 
 public class ItemCLIParser {
@@ -16,9 +16,8 @@ public class ItemCLIParser {
 		String sn = scanner.next();
 		out.print("Item value: ");
 		String valueString = scanner.next();
-		BigDecimal value;
 		try {
-			value = new BigDecimal(valueString);
+			BigDecimal value = new BigDecimal(valueString);
 			return new Item(name, sn, value);
 		} catch (NumberFormatException e) {
 			throw new ValueNotNumeric(valueString);

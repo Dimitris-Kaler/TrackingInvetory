@@ -1,15 +1,13 @@
 package inventory.ui
 
-import inventory.kalerantes.Item
-import inventory.ui.ItemCLIParser
+import inventory.items.Item
 import inventory.ui.exceptions.ValueNotNumeric
+import inventory.utils.Utils
 import spock.lang.Specification
 
 class ItemCLIParserSpec extends Specification {
 
 	def "capture user input, create an item and put it on the list"() {
-		//TODO a big part of this test is duplicated but I think that add item method is going to be deleted
-		//so I will handle it later
 		given: "item properties"
 		String name = "name"
 		String sn = "123456789"
@@ -19,12 +17,10 @@ class ItemCLIParserSpec extends Specification {
 		Scanner scanner = new Scanner(simulateUserInput(name, sn, value))
 
 		and: 'and print stream for capturing program output'
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
+		PrintStream out = Utils.printStream()
 
 		when: 'parsing an item'
 		Item item = new ItemCLIParser().parseItem(scanner, out)
-
 
 		then: 'this item goes inside the list'
 		item.name == name
@@ -32,28 +28,21 @@ class ItemCLIParserSpec extends Specification {
 		item.value == new BigDecimal(value)
 
 		and: 'the appropriate output is captured'
-		captureOutput.toString() == "Item name: Item serial number: Item value: "
+		out.out.toString() == "Item name: Item serial number: Item value: "
 	}
 
 	def "no numeric value for item's value"() {
-		given:
-		String name = "name"
-		String sn = "123456789"
-		String value = "abc"
-
-		and: 'a scanner that simulates the user input'
-		Scanner scanner = new Scanner(simulateUserInput(name, sn, value))
-
-		and: 'and print stream for capturing program output'
-		OutputStream captureOutput = new ByteArrayOutputStream()
-		PrintStream out = new PrintStream(captureOutput)
+		given: 'a scanner that simulates the user input'
+		Scanner scanner = new Scanner(simulateUserInput("name", "123456789", "abc"))
 
 		when: 'parsing an item'
-		Item item = new ItemCLIParser().parseItem(scanner, out)
+		Item item = new ItemCLIParser().parseItem(scanner, Utils.printStream())
 
 		then:
 		def e = thrown(ValueNotNumeric)
 		e.message == "Expected numeric value for item's value but got 'abc' instead"
+
+		and: "the scanner buffer is empty - the abc value is removed"
 		boolean flag = false;
 		try {
 			scanner.next()

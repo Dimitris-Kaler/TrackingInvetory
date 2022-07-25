@@ -1,4 +1,4 @@
-package exceptions;
+package inventory.items.exceptions;
 
 import java.math.BigDecimal;
 

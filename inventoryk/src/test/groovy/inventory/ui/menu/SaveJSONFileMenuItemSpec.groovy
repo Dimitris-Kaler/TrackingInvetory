@@ -1,7 +1,7 @@
 package inventory.ui.menu
 
 import formats.JsonFormat
-import inventory.kalerantes.ItemList
+import inventory.items.ItemList
 import inventory.ui.menu.SaveJSONFileMenuItem
 import spock.lang.Specification
 

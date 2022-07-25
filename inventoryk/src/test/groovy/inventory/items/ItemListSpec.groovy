@@ -1,5 +1,7 @@
-package inventory.kalerantes
+package inventory.items
 
+import inventory.items.Item
+import inventory.items.ItemList
 import spock.lang.Specification
 
 class ItemListSpec extends Specification {

@@ -1,7 +1,8 @@
 package inventory.ui.menu
 
+import inventory.items.ItemList
 import inventory.kalerantes.Exit
-import inventory.kalerantes.ItemList
+import inventory.utils.Utils
 import spock.lang.Specification
 
 class ExitProgramMenuItemSpec extends Specification {
@@ -31,7 +32,7 @@ class ExitProgramMenuItemSpec extends Specification {
 		ItemList list = new ItemList()
 
 		and: "an and output stream"
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+		PrintStream out = Utils.printStream()
 
 		when:
 		mi.execute(list, scanner, out)

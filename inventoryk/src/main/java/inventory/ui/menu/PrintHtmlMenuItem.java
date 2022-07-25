@@ -3,8 +3,8 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import formats.HtmlFormatter;
-import inventory.kalerantes.ItemList;
+import inventory.formatters.HtmlFormatter;
+import inventory.items.ItemList;
 
 public class PrintHtmlMenuItem extends MenuItem {
 

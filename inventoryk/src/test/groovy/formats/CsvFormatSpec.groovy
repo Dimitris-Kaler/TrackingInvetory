@@ -4,8 +4,8 @@ import spock.lang.Specification
 
 import org.junit.jupiter.api.Test
 
-import inventory.kalerantes.Item
-import inventory.kalerantes.ItemList
+import inventory.items.Item
+import inventory.items.ItemList
 
 class CsvFormatSpec extends Specification {
 

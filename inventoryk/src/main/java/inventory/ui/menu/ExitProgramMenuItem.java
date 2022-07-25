@@ -3,8 +3,8 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import inventory.items.ItemList;
 import inventory.kalerantes.Exit;
-import inventory.kalerantes.ItemList;
 
 public class ExitProgramMenuItem extends MenuItem {
 

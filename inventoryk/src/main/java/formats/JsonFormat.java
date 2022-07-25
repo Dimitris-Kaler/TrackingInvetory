@@ -7,8 +7,8 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import exceptions.NullItemListException;
-import inventory.kalerantes.ItemList;
+import inventory.items.ItemList;
+import inventory.items.exceptions.NullItemListException;
 
 public class JsonFormat {
 

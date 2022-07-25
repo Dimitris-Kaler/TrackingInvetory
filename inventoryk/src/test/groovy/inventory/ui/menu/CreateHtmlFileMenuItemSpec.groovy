@@ -1,8 +1,9 @@
 package inventory.ui.menu
 
-import formats.HtmlFormatter
 import inventory.files.TextFile
-import inventory.kalerantes.ItemList
+import inventory.formatters.HtmlFormatter
+import inventory.items.ItemList
+import inventory.utils.Utils
 import spock.lang.Specification
 
 class CreateHtmlFileMenuItemSpec extends Specification {
@@ -35,7 +36,7 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 		Scanner scanner = new Scanner(System.in)
 
 		and: 'an output stream'
-		PrintStream out = new PrintStream(new ByteArrayOutputStream())
+		PrintStream out = Utils.printStream()
 
 		when: 'executing'
 		mi.execute(list, scanner, out)
@@ -54,7 +55,6 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 	def "when an IOException is thrown then it is wrapped and thrown to the client for handling"() {
 		given: 'a list of items'
 		ItemList list = new ItemList()
-
 
 		and: 'a text file that fails'
 		TextFile textFileMock = Stub()

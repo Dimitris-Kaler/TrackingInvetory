@@ -1,4 +1,4 @@
-package exceptions;
+package inventory.items.exceptions;
 
 public class SerialNumberLengthNotEqualNine extends RuntimeException {
 
