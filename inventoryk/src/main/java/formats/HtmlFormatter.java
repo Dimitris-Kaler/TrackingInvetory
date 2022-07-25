@@ -8,18 +8,18 @@ import java.util.stream.Collectors;
 import inventory.kalerantes.Item;
 import inventory.kalerantes.ItemList;
 
-public class HtmlFormat {
+public class HtmlFormatter {
 
 	private static final String LINE_SEP = System.lineSeparator();
 	private static final String TABLE_STYLE = "'margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'";
 	private static final String HEADER_STYLE = "'border-bottom:1px solid blue'";
 	private ItemList items;
 
-	public HtmlFormat() {
+	public HtmlFormatter() {
 		this.items = new ItemList();
 	}
 
-	public HtmlFormat(ItemList items) {
+	public HtmlFormatter(ItemList items) {
 		this.items = items;
 	}
 
@@ -31,15 +31,15 @@ public class HtmlFormat {
 		return items;
 	}
 
-	public String printHtml() {
+	public String html() {
 		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append(htmlHeader());
-		strBuilder.append(printItems());
-		strBuilder.append(htmlFooter());
+		strBuilder.append(header());
+		strBuilder.append(formattedItems());
+		strBuilder.append(footer());
 		return strBuilder.toString();
 	}
 
-	public String htmlHeader() {
+	private String header() {
 		String line1 = String.format("<!DOCTYPE html>%s<html lang=\"en\">%s <head>%s", LINE_SEP, LINE_SEP, LINE_SEP);
 		String line2 = String.format("\t<meta charset=\"UTF-8\">%s", LINE_SEP);
 		String line3 = String.format("\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">%s", LINE_SEP);
@@ -48,11 +48,15 @@ public class HtmlFormat {
 		return String.format("%s%s%s%s%s", line1, line2, line3, line4, line5);
 	}
 
-	public String printItems() {
+	private String formattedItems() {
 		if (!items.getLi().isEmpty())
 			return table(String.format("\t%s%s\t%s", tableHeader(), LINE_SEP, tableRows()));
 
-		return " <p>No items on the Invetory.</p>\n";
+		return String.format("\t<p>No items on the Invetory.</p>%s", LINE_SEP);
+	}
+
+	private String footer() {
+		return String.format("\t</body>%s</html>%s", LINE_SEP, LINE_SEP);
 	}
 
 	private String table(String content) {
@@ -95,14 +99,10 @@ public class HtmlFormat {
 		return String.format("<td>%s</td>", content);
 	}
 
-	public String htmlFooter() {
-		return String.format("\t</body>%s</html>%s", LINE_SEP, LINE_SEP);
-	}
-
 	public void createHtmlFile() {
 		File file = new File("inventory.html");
 		try (FileWriter fWriter = new FileWriter(file)) {
-			fWriter.write(printHtml());
+			fWriter.write(html());
 			System.out.println("HTML File created!");
 
 		} catch (IOException e) {

@@ -1,6 +1,6 @@
 package inventory.ui.menu
 
-import formats.HtmlFormat
+import formats.HtmlFormatter
 import inventory.kalerantes.ItemList
 import inventory.ui.menu.CreateHtmlFileMenuItem
 import spock.lang.Specification
@@ -21,7 +21,7 @@ class CreateHtmlFileMenuItemSpec extends Specification {
 
 	def "when execute method is called then an html file is created"() {
 		given:
-		HtmlFormat mock = Mock()
+		HtmlFormatter mock = Mock()
 		mi.htmlFormatter = mock
 		Scanner scanner = new Scanner(System.in)
 		ItemList list = new ItemList()

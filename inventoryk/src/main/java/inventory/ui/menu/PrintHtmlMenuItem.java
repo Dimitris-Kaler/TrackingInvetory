@@ -3,23 +3,23 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import formats.HtmlFormat;
+import formats.HtmlFormatter;
 import inventory.kalerantes.ItemList;
 
 public class PrintHtmlMenuItem extends MenuItem {
 
-	private HtmlFormat htmlFormat;
+	private HtmlFormatter htmlFormat;
 
 	public PrintHtmlMenuItem() {
 		super("2", "Print Out HTML format");
-		htmlFormat = new HtmlFormat();
+		htmlFormat = new HtmlFormatter();
 	}
 
 	@Override
 	public void execute(ItemList list, Scanner scanner, PrintStream out) {
 		htmlFormat.setItems(list);
 		out.println(headerMessage());
-		out.println(htmlFormat.printHtml());
+		out.println(htmlFormat.html());
 	}
 
 	private String headerMessage() {

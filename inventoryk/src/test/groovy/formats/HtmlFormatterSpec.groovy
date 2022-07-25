@@ -5,7 +5,7 @@ import inventory.kalerantes.ItemList
 import  spock.lang.Specification
 
 
-class HtmlFormatSpec extends Specification {
+class HtmlFormatterSpec extends Specification {
 
 	ItemList items
 
@@ -13,51 +13,51 @@ class HtmlFormatSpec extends Specification {
 		items = new ItemList()
 	}
 
-
-	def "initialise HtmlFormat"(){
+	def "initialise formatter"(){
 		when:
-		HtmlFormat htmlFormat = new HtmlFormat(items);
+		HtmlFormatter formatter = new HtmlFormatter(items);
 
 		then:
-		htmlFormat.items == items;
+		formatter.items == items;
 	}
 
 	def "header of html"(){
 		given:
-		HtmlFormat htmlFormat = new HtmlFormat();
+		HtmlFormatter formatter = new HtmlFormatter();
 
 		expect:
-		htmlFormat.htmlHeader() == header();
+		formatter.header() == expectedHeader();
 	}
 
 	def "message if the list of items is empty"(){
 		given:
-		HtmlFormat htmlFormat = new HtmlFormat();
-		StringBuilder strBuilder = new StringBuilder()
+		HtmlFormatter formatter = new HtmlFormatter();
 
 		expect:
-		htmlFormat.printItems() == " <p>No items on the Invetory.</p>\n"
+		formatter.formattedItems() == "\t<p>No items on the Invetory.</p>${System.lineSeparator()}"
 	}
 
+	//TODO Should you test many??
 	def "items of the list"() {
 		given:
 		Item item = new Item("SEGA", "345ERW2QA", 250)
+		//TODO law of Demeter violation
 		items.getLi().add(item)
-		HtmlFormat htmlFormat = new HtmlFormat(items);
+		HtmlFormatter formatter = new HtmlFormatter(items);
 
 		expect:
-		htmlFormat.printItems() ==  tableItems();
+		formatter.formattedItems() ==  expectedTableItems();
 	}
 
 	def "html footer"(){
 		given:
-		HtmlFormat htmlFormat = new HtmlFormat();
+		HtmlFormatter formatter = new HtmlFormatter();
 
 		expect:
-		htmlFormat.htmlFooter() == footer()
+		formatter.footer() == expectedFooter()
 	}
 
-	private String header() {
+	private String expectedHeader() {
 		"<!DOCTYPE html>${System.lineSeparator()}<html lang=\"en\">${System.lineSeparator()} <head>${System.lineSeparator()}\t<meta charset=\"UTF-8\">${System.lineSeparator()}" +
 		"\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">${System.lineSeparator()}" +
 		"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">${System.lineSeparator()}" +
@@ -66,26 +66,26 @@ class HtmlFormatSpec extends Specification {
 		"<body>${System.lineSeparator()}"
 	}
 
-	private String tableItems() {
+	private String expectedTableItems() {
 		"<table style='margin:auto;border-top:2px solid blue;border-bottom:2px solid blue;text-align:center;width:300px;'>${System.lineSeparator()}" +
 		"\t<thead style='border-bottom:1px solid blue'><tr><th>Name</th><th>Serial Number</th><th>Value</th></tr></thead>${System.lineSeparator()}" +
 		"\t<tbody><tr><td>SEGA</td><td>345ERW2QA</td><td>250</td></tr></tbody>${System.lineSeparator()}" +
 		"</table>"
 	}
 
-	private String footer() {
+	private String expectedFooter() {
 		"\t</body>${System.lineSeparator()}</html>${System.lineSeparator()}"
 	}
 
 	def "create HtmlFile With the invetory List"(){
 		given:
-		HtmlFormat htmlFormat=new HtmlFormat(items);
+		HtmlFormatter htmlFormat=new HtmlFormatter(items);
 		when:
 		htmlFormat.createHtmlFile();
 
 		then:
 		File file=new File("inventory.html")
 		FileWriter fWriter=new FileWriter(file)
-		fWriter.write(htmlFormat.printHtml());
+		fWriter.write(htmlFormat.html());
 	}
 }

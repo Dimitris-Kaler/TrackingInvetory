@@ -3,16 +3,16 @@ package inventory.ui.menu;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import formats.HtmlFormat;
+import formats.HtmlFormatter;
 import inventory.kalerantes.ItemList;
 
 public class CreateHtmlFileMenuItem extends MenuItem {
 
-	private HtmlFormat htmlFormatter;
+	private HtmlFormatter htmlFormatter;
 
 	public CreateHtmlFileMenuItem() {
 		super("3", "Save Inventory To Html file");
-		htmlFormatter = new HtmlFormat();
+		htmlFormatter = new HtmlFormatter();
 	}
 
 	@Override
