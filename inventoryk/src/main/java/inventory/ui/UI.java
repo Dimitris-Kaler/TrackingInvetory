@@ -18,7 +18,7 @@ public class UI {
 	public UI() {
 		list = new ItemList();
 		menu = new Menu();
-		cliMenuChoiceValidator = new CLIMenuChoiceValidator();
+		cliMenuChoiceValidator = new CLIMenuChoiceValidator(menu);
 	}
 
 	public UI(Menu menu) {

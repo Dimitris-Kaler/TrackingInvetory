@@ -32,6 +32,12 @@ public class Menu {
 		throw new InvalidMenuItemCode();
 	}
 
+	public List<String> codes() {
+		return menuList.stream()
+				.map(MenuItem::getCode)
+				.collect(Collectors.toList());
+	}
+
 	private String header() {
 		return "WELCOME TO TRACKING INVETORY - PROJECT\n" +
 				"**************************************\n";

@@ -1,7 +1,6 @@
 package inventory.ui.menu
 
-import inventory.ui.menu.Menu
-import inventory.ui.menu.MenuItem
+import inventory.items.ItemList
 import inventory.ui.menu.exceptions.InvalidMenuItemCode
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -67,4 +66,39 @@ class MenuSpec extends Specification {
 		"6"  || "Exit The program"
 	}
 
+	def "menu codes"() {
+		given:
+		Menu menu = new Menu()
+		menu.menuList = [new MenuItem1(), new MenuItem2()]
+
+		expect:
+		menu.codes() == ["code1", "code"]
+	}
+
+	class MenuItem1 extends MenuItem {
+
+			MenuItem1() {
+				super("code1", "")
+			}
+
+			@Override
+			public void execute(ItemList list, Scanner scanner, PrintStream out) {
+				// TODO Auto-generated method stub
+			}
+		}
+
+		class MenuItem2 extends MenuItem {
+
+			MenuItem2() {
+				super("code", "")
+			}
+
+			@Override
+			public void execute(ItemList list, Scanner scanner, PrintStream out) {
+				// TODO Auto-generated method stub
+			}
+		}
+
 }
+
+

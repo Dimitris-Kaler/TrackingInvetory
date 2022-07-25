@@ -1,18 +1,21 @@
 package inventory.ui.menu
 
 import inventory.ui.exceptions.InvalidMenuChoice
-import inventory.ui.menu.CLIMenuChoiceValidator
 import spock.lang.Specification
 import spock.lang.Unroll
 
 class CLIMenuChoiceValidatorSpec extends Specification {
 
-	def "validate throws exception if choice not between 1 and 6"() {
-		given:
-		CLIMenuChoiceValidator v = new CLIMenuChoiceValidator()
+	CLIMenuChoiceValidator validator
 
+	def setup() {
+		Menu menu = new Menu();
+		validator = new CLIMenuChoiceValidator(menu)
+	}
+
+	def "validate throws exception if choice not menu items codes"() {
 		when:
-		v.validate(choice)
+		validator.validate(choice)
 
 		then:
 		def e = thrown(InvalidMenuChoice)
@@ -24,12 +27,9 @@ class CLIMenuChoiceValidatorSpec extends Specification {
 
 
 	@Unroll
-	def "accept input only between 1 and 6" () {
-		given:
-		CLIMenuChoiceValidator v = new CLIMenuChoiceValidator()
-
+	def "accept input only if in menu items codes" () {
 		when:
-		v.validate(choice)
+		validator.validate(choice)
 
 		then:
 		notThrown(InvalidMenuChoice)
@@ -37,4 +37,5 @@ class CLIMenuChoiceValidatorSpec extends Specification {
 		where:
 		choice << ("1".."6")
 	}
+
 }

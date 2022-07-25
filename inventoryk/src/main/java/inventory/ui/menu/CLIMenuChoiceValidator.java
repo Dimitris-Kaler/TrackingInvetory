@@ -4,21 +4,16 @@ import inventory.ui.exceptions.InvalidMenuChoice;
 
 public class CLIMenuChoiceValidator {
 
+
+	private Menu menu;
+
+	public CLIMenuChoiceValidator(Menu menu) {
+		this.menu = menu;
+	}
+
 	public void validate(String choice) {
-		validateInBounds(validateInteger(choice));
-	}
-
-	private static void validateInBounds(int value) {
-		if (value < 1 || value > 6)
-			throw new InvalidMenuChoice(String.valueOf(value));
-	}
-
-	private static int validateInteger(String choice) {
-		try {
-			return Integer.parseInt(choice);
-		} catch (NumberFormatException e) {
+		if (!menu.codes().contains(choice))
 			throw new InvalidMenuChoice(choice);
-		}
 	}
 
 }
